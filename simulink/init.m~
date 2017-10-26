@@ -21,17 +21,6 @@ b(2) = L/Iy;
 b(3) = L/Iz;
 
 % Ganhos dos controladores
-% kp_z 
-% kp_phi
-% kp_theta
-% kp_psi
-% 
-% ki_z
-% ki_phi
-% ki_theta
-% ki_psi
-% 
-% kd_z
-% kd_phi
-% kd_theta
-% kd_psi
+k_z
+ki_z
+ki_z
