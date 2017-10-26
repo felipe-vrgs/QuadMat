@@ -14,9 +14,9 @@ function [U] = PID(Gains, inp, SetPoint, Ref)
 		idx = 1;
 	elseif strcmp(Ref,'U2')
 		idx = 2;
-	elseif strcmp(Ref,'U2')
+	elseif strcmp(Ref,'U3')
 		idx = 3;
-	elseif strcmp(Ref,'U2')
+	elseif strcmp(Ref,'U4')
 		idx = 4;
 	end
 

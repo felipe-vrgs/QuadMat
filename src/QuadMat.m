@@ -11,7 +11,8 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,[0 0 0 0 0 0 0 0 0 0 0 0]);
+    Ins = InsertDisturb('phi','theta','psi');
+    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
     	for k=1:length(t)
@@ -31,7 +32,40 @@ function ExecMain
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
      PlotDrone(t,X,'XYZ')
-     % PlotDrone(t,X,'Ang')
+     PlotDrone(t,X,'Ang')
+end
+
+%% InsertDisturb: function description
+function [in] = InsertDisturb(varargin)
+    in = [0 0 0 0 0 0 0 0 0 0 0 0];
+    for n = 1:nargin
+        val = varargin(n);
+        if strcmp(val,'phi')
+            in(1) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+        elseif strcmp(val,'phidot')
+            in(2) = -0.1 + 2*rand(1,1)*0.1;
+        elseif strcmp(val,'theta')
+            in(3) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+        elseif strcmp(val,'thetadot')
+            in(4) = -0.1 + 2*rand(1,1)*0.1;
+        elseif strcmp(val,'psi')
+            in(5) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+        elseif strcmp(val,'psidot')
+            in(6) = -0.1 + 2*rand(1,1)*0.1;
+        elseif strcmp(val,'z')
+            in(7) = -100 + 2*rand(1,1)*100;
+        elseif strcmp(val,'zdot')
+            in(8) = -0.5 + 2*rand(1,1)*0.5;
+        elseif strcmp(val,'x')
+            in(9) = -100 + 2*rand(1,1)*100;
+        elseif strcmp(val,'xdot')
+            in(10) = -0.5 + 2*rand(1,1)*0.5;
+        elseif strcmp(val,'y')
+            in(11) = -100 + 2*rand(1,1)*100;
+        elseif strcmp(val,'ydot')
+            in(12) = -0.5 + 2*rand(1,1)*0.5;
+        end
+    end
 end
 
 %% SetGlobals: function description
@@ -63,7 +97,7 @@ function SetGlobals()
     
     % Ctes do modelo
     global g L Kf Km m a b;
-    g = - 9.81;       % Gravidade
+    g = - 9.81;     % Gravidade
     Ix = 5e-3;      % Inércia eixo X
     Iy = 5e-3;      % Inércia eixo Y
     Iz = 10e-3;     % Inércia eixo Z
@@ -81,7 +115,7 @@ function SetGlobals()
     b(1) = L/Ix;
     b(2) = L/Iy;
     b(3) = L/Iz;
-
+    
     % Ctes do controle
     global err_ant err_int windup;
     err_ant = zeros(4,1);
