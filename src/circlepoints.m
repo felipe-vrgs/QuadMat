@@ -1,5 +1,3 @@
-clear all
-clc
 
 x0 = 2; % Suponha que aqui utilizaremos o x0 para a célula de equilíbrio encontrada
 y0 = 2; % Suponha que aqui utilizaremos o y0 para a célula de equilíbrio encontrada
