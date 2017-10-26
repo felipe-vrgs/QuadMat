@@ -1,4 +1,5 @@
 %% Main function, describes the global variables and does the simulation
+%% QuadMat: function description
 function ExecMain
     clear all;
     clc;
@@ -9,7 +10,8 @@ function ExecMain
         de estados, como segundo o tempo de simulação e o terceiro é um array
         com as condições iniciais do sistema.
     %}
-    [t,X] = ode45(@Quadcopter,0:0.001:10,[0 0 0 0 0 0 0 0 0 0 0 0]);
+    Control = 'PID';
+    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,[0 0 0 0 0 0 0 0 0 0 0 0]);
     cacm = zeros(divisoes,divisoes);
     %{
     	for k=1:length(t)
@@ -28,8 +30,8 @@ function ExecMain
     % zlabel('z','Interpreter','Latex')
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
-     PlotDrone(t,X,0) % Plot dos ângulos
-     PlotDrone(t,X,1) % Plot do XYZ
+     PlotDrone(t,X,'XYZ')
+     % PlotDrone(t,X,'Ang')
 end
 
 %% SetGlobals: function description
@@ -79,4 +81,11 @@ function SetGlobals()
     b(1) = L/Ix;
     b(2) = L/Iy;
     b(3) = L/Iz;
+
+    % Ctes do controle
+    global err_ant err_int windup;
+    err_ant = zeros(4,1);
+    t_ant = zeros(4,1);
+    windup = [10 10 10 10];
+    err_int = zeros(4,1);
 end

@@ -7,10 +7,14 @@
 %! @return     graphs
 %!
 function PlotDrone(t,X,ty)
-    if ty == 1
+    if strcmp(ty,'XYZ')
         PlotXYZ(t,X)
-    else
+    elseif strcmp(ty,'Ang')
         PlotAngles(t,X)
+    elseif strcmp(ty,'VelXYZ')
+        PlotXYZVel(t,X)
+    elseif strcmp(ty,'VelAng')
+        PlotAngVel(t,X)
     end
 end
 
@@ -37,6 +41,29 @@ function PlotXYZ(t,X)
     suptitle('Movimento em XYZ')
 end
 
+function PlotXYZVel(t,X)
+    figure()
+    subplot(2,2,1)
+    plot(t,X(:,10)) % Velocidade em X
+    title('Velocidade em X','Interpreter','Latex')
+    ylabel('$\dot{X}$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(2,2,2)
+    plot(t,X(:,12)) % Velocidade em Y
+    title('Velocidade em Y','Interpreter','Latex')
+    ylabel('$\dot{Y}$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(2,1,2)
+    plot(t,X(:,8)) % Velocidade em Z
+    title('Velocidade em Z','Interpreter','Latex')
+    ylabel('$\dot{Z}$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    suptitle('Velocidade em XYZ')
+end
+
 function PlotAngles(t,X)
     figure()
     subplot(2,2,1)
@@ -59,3 +86,27 @@ function PlotAngles(t,X)
     grid on
     suptitle('Variação dos ângulos')
 end
+
+function PlotAngVel(t,X)
+    figure()
+    subplot(2,2,1)
+    plot(t,X(:,2)) % Velocidade phi
+    title('Velocidade $\dot\phi$','Interpreter','Latex')
+    ylabel('$\dot\phi$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(2,2,2)
+    plot(t,X(:,4)) % Posição em theta
+    title('Velocidade $\dot\theta$','Interpreter','Latex')
+    ylabel('$\dot\theta$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(2,1,2)
+    plot(t,X(:,6)) % Posição em psi
+    title('Velocidade $\dot\psi$','Interpreter','Latex')
+    ylabel('$\dot\psi$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    suptitle('Velocidade dos angulos')
+end
+

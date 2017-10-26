@@ -1,9 +1,14 @@
-%% Quadcopter: function description
-%! @brief      Describes the space state equations
-%! @param      t     time vector
-%! @param      x     inital conditions
-%! @return     an array with dx
-function dx = Quadcopter(t,x)
+% Quadcopter: function description !
+% @brief      Describes the space state equations !
+%
+% @param      t     time vector !
+% @param      x     inital conditions !
+% @param      U     entrys
+% @param      x     inital conditions !
+%
+% @return     an array with dx
+%
+function dx = Quadcopter(t,x,control)
     % Montando o array dx que retorna da funcao
     dx = zeros(12,1);
     %{
@@ -21,17 +26,27 @@ function dx = Quadcopter(t,x)
         x(12) => dy/dT
     %}
     global g Km b m a Kf;
+    kp_z = 10;
+    ki_z = 0.01;
+    kd_z = 10000;
+
+    U(1) = PID([kp_z ki_z kd_z], x(7), 50, 'U1');
+    U(2) = 0;
+    U(3) = 0;
+    U(4) = 0;
 
     % W é a vel angular em cada motor
-    W = [6000 5000 6000 7000];
-    % W = [0 0 0 0];
+    W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
+    W(2) = ((U(1)/(4*Kf)) - (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);
+    W(3) = ((U(1)/(4*Kf)) - (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
+    W(4) = ((U(1)/(4*Kf)) + (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);
 
     % Matriz U das entradas
     % U(1) = Kf*(W(1)^2 + W(2)^2 + W(3)^2 + W(4)^2);   % Total Thrust
     % U(2) = Kf*(W(4)^2 - W(2)^2);                     % Roll
     % U(3) = Kf*(- W(3)^2 + W(1)^2);                   % Pitch
     % U(4) = Km*(W(1)^2 - W(2)^2 + W(3)^2 - W(4)^2);   % Yaw
-    U = [5 0 2 0];
+    % U = [5 0 2 0];
                                                 
   
     
