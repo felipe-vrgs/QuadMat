@@ -1,4 +1,3 @@
-
 %% InterpolaRGB: function description
 function [c] = InterpolaRGB(ci,cf,intr)
     c = zeros(3,1);

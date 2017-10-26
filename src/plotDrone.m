@@ -6,7 +6,7 @@
 %!
 %! @return     graphs
 %!
-function plotDrone(t,X,ty)
+function PlotDrone(t,X,ty)
     if ty == 1
         PlotXYZ(t,X)
     else

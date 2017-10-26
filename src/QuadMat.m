@@ -28,8 +28,8 @@ function ExecMain
     % zlabel('z','Interpreter','Latex')
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
-     plotDrone(t,X,0) % Plot dos ângulos
-     plotDrone(t,X,1) % Plot do XYZ
+     PlotDrone(t,X,0) % Plot dos ângulos
+     PlotDrone(t,X,1) % Plot do XYZ
 end
 
 %% SetGlobals: function description
