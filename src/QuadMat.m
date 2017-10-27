@@ -41,15 +41,15 @@ function [in] = InsertDisturb(varargin)
     for n = 1:nargin
         val = varargin(n);
         if strcmp(val,'phi')
-            in(1) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+            in(1) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'phidot')
             in(2) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'theta')
-            in(3) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+            in(3) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'thetadot')
             in(4) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'psi')
-            in(5) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10 de disturbio
+            in(5) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'psidot')
             in(6) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'z')
