@@ -11,7 +11,7 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb('phi','theta','psi');
+    Ins = InsertDisturb();
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
@@ -32,7 +32,7 @@ function ExecMain
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
      PlotDrone(t,X,'XYZ')
-     PlotDrone(t,X,'Ang')
+     % PlotDrone(t,X,'Ang')
 end
 
 %% InsertDisturb: function description
@@ -98,13 +98,13 @@ function SetGlobals()
     % Ctes do modelo
     global g L Kf Km m a b;
     g = - 9.81;     % Gravidade
-    Ix = 5e-3;      % Inércia eixo X
-    Iy = 5e-3;      % Inércia eixo Y
-    Iz = 10e-3;     % Inércia eixo Z
-    L = 0.25;       % Distância do centro até qualquer um dos motores
-    Km = 3e-6;      % Cte aerodinâmica (thrust)
-    Kf = 1e-7;      % Cte de arrasto (drag)
-    m = 0.5;        % Massa do drone
+    Ix = 7.5e-3;      % Inércia eixo X
+    Iy = 7.5e-3;      % Inércia eixo Y
+    Iz = 1.3e-2;     % Inércia eixo Z
+    L = 0.23;       % Distância do centro até qualquer um dos motores
+    Km = 7.5e-7;      % Cte aerodinâmica (thrust)
+    Kf = 3.13e-5;      % Cte de arrasto (drag)
+    m = 0.65;        % Massa do drone
     Jr = 6e-5;      % Inércia do rotor
     % Redução de variáveis
     a(1) = (Iy - Iz)/Ix;
@@ -119,7 +119,6 @@ function SetGlobals()
     % Ctes do controle
     global err_ant err_int windup;
     err_ant = zeros(4,1);
-    t_ant = zeros(4,1);
     windup = [10 10 10 10];
     err_int = zeros(4,1);
 end

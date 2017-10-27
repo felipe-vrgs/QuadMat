@@ -51,4 +51,8 @@ function [U] = PID(Gains, inp, SetPoint, Ref)
 
     % Return U
     U = P + I + D;
+    if U > 15
+    	U = 15;
+    elseif U < -15
+    	U = -15;
 end
