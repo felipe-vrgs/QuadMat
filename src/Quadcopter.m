@@ -1,4 +1,8 @@
-% Quadcopter: function description !
+% Quadcopter: function description !  
+% 
+%  TODO:    * Genetic function for comms and fitness calc
+%           * Simulink blocks for control and other calculations
+% 
 % @brief      Describes the space state equations !
 %
 % @param      t     time vector !
