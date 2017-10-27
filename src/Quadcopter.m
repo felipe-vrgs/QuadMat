@@ -26,10 +26,10 @@ function dx = Quadcopter(t,x,control)
         x(11) => y
         x(12) => dy/dT
     %}
-    global g Km b m a Kf;
-    kp_z = 1.1;
-    ki_z = 0.1;
-    kd_z = 20;
+    global g Km b m a Kf U_hist;
+    kp_z = 28;
+    ki_z = 0;
+    kd_z = 250;
 
     kp_phi = 5;
     ki_phi = 0;
@@ -43,14 +43,21 @@ function dx = Quadcopter(t,x,control)
     ki_psi = 0;
     kd_psi = 10;
 
-    U(1) = PID([kp_z ki_z kd_z], x(7), 40, 'U1');
+    U(1) = PID([kp_z ki_z kd_z], x(7), 5, 'U1');
+    U(2) = PID([kp_phi ki_phi kd_phi], x(1), 0, 'U2');
+    U(3) = PID([kp_theta ki_theta kd_theta], x(3), 0, 'U3');
+    U(4) = PID([kp_psi ki_psi kd_psi], x(5), 0, 'U4');
+
     % U(1) = 5;
-    % U(2) = PID([kp_phi ki_phi kd_phi], x(1), 0, 'U2');
-    % U(3) = PID([kp_theta ki_theta kd_theta], x(3), 0, 'U3');
-    % U(4) = PID([kp_psi ki_psi kd_psi], x(5), 0, 'U4');
-    U(2) = 0;
-    U(3) = 0;
-    U(4) = 0;
+    % U(2) = 0;
+    % U(3) = 0;
+    % U(4) = 0;
+
+    global U_hist t_hist;
+    U_hist = [U_hist; U];
+    t_hist = [t_hist; t];
+    
+
 
     % W é a vel angular em cada motor
     W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);

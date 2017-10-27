@@ -11,7 +11,7 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb();
+    Ins = InsertDisturb('phi','theta','psi','z','thetadot');
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
@@ -31,8 +31,24 @@ function ExecMain
     % zlabel('z','Interpreter','Latex')
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
-     PlotDrone(t,X,'XYZ')
-     % PlotDrone(t,X,'Ang')
+    PlotDrone(t,X,'XYZ')
+    PlotDrone(t,X,'Ang')
+
+    global U_hist t_hist;
+    % figure()
+    size(U_hist)
+    size(t_hist)
+    figure()
+    subplot(2,2,1)
+    plot(t_hist(:,1), U_hist(:,1))
+    subplot(2,2,2)
+    plot(t_hist(:,1), U_hist(:,2))
+    subplot(2,2,3)
+    plot(t_hist(:,1), U_hist(:,3))
+    subplot(2,2,4)
+    plot(t_hist(:,1), U_hist(:,4))
+    U_hist;
+     
 end
 
 %% InsertDisturb: function description
@@ -97,15 +113,16 @@ function SetGlobals()
     
     % Ctes do modelo
     global g L Kf Km m a b;
-    g = - 9.81;     % Gravidade
+    g = -9.81;     % Gravidade
     Ix = 7.5e-3;      % Inércia eixo X
     Iy = 7.5e-3;      % Inércia eixo Y
     Iz = 1.3e-2;     % Inércia eixo Z
-    L = 0.23;       % Distância do centro até qualquer um dos motores
+    L = 0.2;       % Distância do centro até qualquer um dos motores
     Km = 7.5e-7;      % Cte aerodinâmica (thrust)
     Kf = 3.13e-5;      % Cte de arrasto (drag)
-    m = 0.65;        % Massa do drone
+    m = 0.5;        % Massa do drone
     Jr = 6e-5;      % Inércia do rotor
+    
     % Redução de variáveis
     a(1) = (Iy - Iz)/Ix;
     a(2) = Jr/Ix;
@@ -115,7 +132,7 @@ function SetGlobals()
     b(1) = L/Ix;
     b(2) = L/Iy;
     b(3) = L/Iz;
-    
+
     % Ctes do controle
     global err_ant err_int windup;
     err_ant = zeros(4,1);
