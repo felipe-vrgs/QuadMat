@@ -32,22 +32,22 @@ function ExecMain
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
     PlotDrone(t,X,'XYZ')
-    PlotDrone(t,X,'Ang')
+    % PlotDrone(t,X,'Ang')
 
     global U_hist t_hist;
     % figure()
-    size(U_hist)
-    size(t_hist)
-    figure()
-    subplot(2,2,1)
-    plot(t_hist(:,1), U_hist(:,1))
-    subplot(2,2,2)
-    plot(t_hist(:,1), U_hist(:,2))
-    subplot(2,2,3)
-    plot(t_hist(:,1), U_hist(:,3))
-    subplot(2,2,4)
-    plot(t_hist(:,1), U_hist(:,4))
-    U_hist;
+    % size(U_hist)
+    % size(t_hist)
+    % figure()
+    % subplot(2,2,1)
+    % plot(t_hist(:,1), U_hist(:,1))
+    % subplot(2,2,2)
+    % plot(t_hist(:,1), U_hist(:,2))
+    % subplot(2,2,3)
+    % plot(t_hist(:,1), U_hist(:,3))
+    % subplot(2,2,4)
+    % plot(t_hist(:,1), U_hist(:,4))
+    % U_hist;
      
 end
 
@@ -127,7 +127,7 @@ function SetGlobals()
     a(1) = (Iy - Iz)/Ix;
     a(2) = Jr/Ix;
     a(3) = (Iz - Ix)/Iy;
-    a(4) = Jr/Iy;
+    a(4) = Jr/Iy;   
     a(5) = (Ix - Iy)/Iz;
     b(1) = L/Ix;
     b(2) = L/Iy;

@@ -8,7 +8,7 @@
 %!
 function PlotDrone(t,X,ty)
     if strcmp(ty,'XYZ')
-        PlotXYZ(t,X)
+        PlotXYZAng(t,X)
     elseif strcmp(ty,'Ang')
         PlotAngles(t,X)
     elseif strcmp(ty,'VelXYZ')
@@ -85,6 +85,48 @@ function PlotAngles(t,X)
     xlabel('Tempo (s)','Interpreter','Latex')
     grid on
     suptitle('Movimento Angular')
+end
+
+function PlotXYZAng(t,X)
+    figure()
+    hold on
+    subplot(3,2,1)
+    plot(t,X(:,9)) % Posição em X
+    % title('Posi\c{c}\~{a}o em X','Interpreter','Latex')
+    ylabel('X','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(3,2,2)
+    plot(t,X(:,1)) % Angulo phi
+    % title('\^Angulo $\phi$','Interpreter','Latex')
+    ylabel('$\phi$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(3,2,3)
+    plot(t,X(:,11)) % Posição em Y
+    % title('Posi\c{c}\~{a}o em Y','Interpreter','Latex')
+    ylabel('Y','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(3,2,5)
+    plot(t,X(:,7)) % Posição em Z
+    % title('Posi\c{c}\~{a}o em Z','Interpreter','Latex')
+    ylabel('Z','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(3,2,4)
+    plot(t,X(:,3)) % Posição em theta
+    % title('\^Angulo $\theta$','Interpreter','Latex')
+    ylabel('$\theta$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    subplot(3,2,6)
+    plot(t,X(:,5)) % Posição em psi
+    % title('\^Angulo $\psi$','Interpreter','Latex')
+    ylabel('$\psi$','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    suptitle('Variacao das Posicoes Angulares e Lineares')
 end
 
 function PlotAngVel(t,X)
