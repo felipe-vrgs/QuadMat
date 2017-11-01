@@ -84,7 +84,7 @@ function PlotAngles(t,X)
     ylabel('$\psi$','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     grid on
-    suptitle('Variação dos ângulos')
+    suptitle('Movimento Angular')
 end
 
 function PlotAngVel(t,X)
@@ -107,6 +107,6 @@ function PlotAngVel(t,X)
     ylabel('$\dot\psi$','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     grid on
-    suptitle('Velocidade dos angulos')
+    suptitle('Velocidade Angular')
 end
 

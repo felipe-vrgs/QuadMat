@@ -11,7 +11,7 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb('phi','theta','psi','z','thetadot');
+    Ins = InsertDisturb();
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
