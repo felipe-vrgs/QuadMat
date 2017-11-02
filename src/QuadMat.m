@@ -11,7 +11,7 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb('phi','theta','psi','z','thetadot');
+    Ins = InsertDisturb('theta','thetadot','phi','phidot','psi','psidot');
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
@@ -31,14 +31,13 @@ function ExecMain
     % zlabel('z','Interpreter','Latex')
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
-    PlotDrone(t,X,'XYZ')
-    PlotDrone(t,X,'Ang')
+    PlotDrone(t,X,'XYZAng')
+    % PlotDrone(t,X,'Ang')
 
     global U_hist t_hist;
-    % figure()
+    figure()
     size(U_hist)
     size(t_hist)
-    figure()
     subplot(2,2,1)
     plot(t_hist(:,1), U_hist(:,1))
     subplot(2,2,2)
@@ -127,7 +126,7 @@ function SetGlobals()
     a(1) = (Iy - Iz)/Ix;
     a(2) = Jr/Ix;
     a(3) = (Iz - Ix)/Iy;
-    a(4) = Jr/Iy;
+    a(4) = Jr/Iy;   
     a(5) = (Ix - Iy)/Iz;
     b(1) = L/Ix;
     b(2) = L/Iy;
