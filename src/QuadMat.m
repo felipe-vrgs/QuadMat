@@ -1,8 +1,36 @@
 %% Main function, describes the global variables and does the simulation
 %% QuadMat: function description
-function ExecMain
-    clear all;
-    clc;
+function [t,X] = QuadMat(gains,target,setpoint)
+    [t,X] = ExecMain(gains,target,setpoint);
+    % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
+    % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
+    % grid on
+    % title('Posicao Drone','Interpreter','Latex')
+    % ylabel('y','Interpreter','Latex')
+    % xlabel('x','Interpreter','Latex')
+    % zlabel('z','Interpreter','Latex')
+    % plot(t,X(:,7)) % Posicao do pendulo
+    % plot1(cacm);
+    % PlotDrone(t,X,'XYZAng')
+    % PlotDrone(t,X,'Ang')
+
+    % global U_hist t_hist;
+    % figure()
+    % size(U_hist)
+    % size(t_hist)
+    % subplot(2,2,1)
+    % plot(t_hist(:,1), U_hist(:,1))
+    % subplot(2,2,2)
+    % plot(t_hist(:,1), U_hist(:,2))
+    % subplot(2,2,3)
+    % plot(t_hist(:,1), U_hist(:,3))
+    % subplot(2,2,4)
+    % plot(t_hist(:,1), U_hist(:,4))
+    % U_hist;
+end
+
+
+function [t,X] = ExecMain(gains,target,setpoint)
     SetGlobals();
     global divisoes;
     %{
@@ -12,8 +40,8 @@ function ExecMain
     %}
     Control = 'PID';
     Ins = InsertDisturb('theta','thetadot','phi','phidot','psi','psidot');
-    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
-    cacm = zeros(divisoes,divisoes);
+    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.001:10,Ins);
+    % cacm = zeros(divisoes,divisoes);
     %{
     	for k=1:length(t)
             x1 = X(k,3)
@@ -22,32 +50,6 @@ function ExecMain
             cacm(i,j) = cacm(i,j) + 1;
         end
     %}
-    % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
-    % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
-    % grid on
-    % title('Posicao Drone','Interpreter','Latex')
-    % ylabel('y','Interpreter','Latex')
-    % xlabel('x','Interpreter','Latex')
-    % zlabel('z','Interpreter','Latex')
-     % plot(t,X(:,7)) % Posicao do pendulo
-     %plot1(cacm);
-    PlotDrone(t,X,'XYZAng')
-    % PlotDrone(t,X,'Ang')
-
-    global U_hist t_hist;
-    figure()
-    size(U_hist)
-    size(t_hist)
-    subplot(2,2,1)
-    plot(t_hist(:,1), U_hist(:,1))
-    subplot(2,2,2)
-    plot(t_hist(:,1), U_hist(:,2))
-    subplot(2,2,3)
-    plot(t_hist(:,1), U_hist(:,3))
-    subplot(2,2,4)
-    plot(t_hist(:,1), U_hist(:,4))
-    U_hist;
-     
 end
 
 %% InsertDisturb: function description

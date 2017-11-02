@@ -10,19 +10,23 @@ Selecao = 'torneio'; %roleta, torneio
 
 Nome = [Funcao '_' Crossover '_' Selecao];
 d = 2;
-switch Funcao
-    case 'schwefel'
-        Custo = @(dim,x1,x2) 418.9829*d - (x1.*sin(sqrt(abs(x1)))-x2.*sin(sqrt(abs(x2))));
-        Dominio = [-500 500]; %Limite superior e inferior do domínio
-    case 'rastrigin'
-        Custo = @(dim,x1,x2) 20+x1.^2+x2.^2-10*(cos(2*pi.*x1)+cos(2*pi.*x2));
-        Dominio = [-5 5]; %Limite superior e inferior do domínio
-    case 'expcirc'
-        Custo = @(dim,x1,x2) x1.*exp(-((x1.^2)+(x2.^2)));
-        Dominio = [-2 2];
-    otherwise
-        error('Nenhuma função custo válida foi definida');
-end
+
+Custo = @(dim,x1,x2) 418.9829*d - (x1.*sin(sqrt(abs(x1)))-x2.*sin(sqrt(abs(x2))));
+Dominio = [-500 500]; %Limite superior e inferior do domínio
+                      %
+% switch Funcao
+%     case 'schwefel'
+%         Custo = @(dim,x1,x2) 418.9829*d - (x1.*sin(sqrt(abs(x1)))-x2.*sin(sqrt(abs(x2))));
+%         Dominio = [-500 500]; %Limite superior e inferior do domínio
+%     case 'rastrigin'
+%         Custo = @(dim,x1,x2) 20+x1.^2+x2.^2-10*(cos(2*pi.*x1)+cos(2*pi.*x2));
+%         Dominio = [-5 5]; %Limite superior e inferior do domínio
+%     case 'expcirc'
+%         Custo = @(dim,x1,x2) x1.*exp(-((x1.^2)+(x2.^2)));
+%         Dominio = [-2 2];
+%     otherwise
+%         error('Nenhuma função custo válida foi definida');
+% end
 
 [X,Y] = meshgrid(Dominio(1):((Dominio(2)-Dominio(1))/200):Dominio(2));
 Z = Custo(d,X,Y);

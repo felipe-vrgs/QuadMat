@@ -1,0 +1,313 @@
+INICIO DO LOG
+2017-11-02 15:21:26
+
+Inicando execução #1...
+Plotando gráfico da população inicial da execução #1
+Época    1 -> Fitness Médio 1072.6749  Fitness Máximo 1666.4412 Diferença no Fitness 0.2123
+Época    2 -> Fitness Médio 1142.9443  Fitness Máximo 1666.4412 Diferença no Fitness 0.0615
+Época    3 -> Fitness Médio 1183.8677  Fitness Máximo 1666.4412 Diferença no Fitness 0.0346
+Época    4 -> Fitness Médio 1214.5654  Fitness Máximo 1666.4412 Diferença no Fitness 0.0253
+Época    5 -> Fitness Médio 1249.0834  Fitness Máximo 1666.4412 Diferença no Fitness 0.0276
+Época    6 -> Fitness Médio 1290.3053  Fitness Máximo 1666.4412 Diferença no Fitness 0.0319
+Época    7 -> Fitness Médio 1312.5844  Fitness Máximo 1666.4412 Diferença no Fitness 0.0170
+Época    8 -> Fitness Médio 1357.2207  Fitness Máximo 1666.4412 Diferença no Fitness 0.0329
+Época    9 -> Fitness Médio 1396.4698  Fitness Máximo 1666.4412 Diferença no Fitness 0.0281
+Época   10 -> Fitness Médio 1440.2185  Fitness Máximo 1674.1994 Diferença no Fitness 0.0304
+Época   11 -> Fitness Médio 1498.2165  Fitness Máximo 1674.1994 Diferença no Fitness 0.0387
+Época   12 -> Fitness Médio 1560.5792  Fitness Máximo 1674.1994 Diferença no Fitness 0.0400
+Época   13 -> Fitness Médio 1624.1493  Fitness Máximo 1675.1962 Diferença no Fitness 0.0391
+Época   14 -> Fitness Médio 1657.0832  Fitness Máximo 1675.1962 Diferença no Fitness 0.0199
+Época   15 -> Fitness Médio 1668.9921  Fitness Máximo 1675.3193 Diferença no Fitness 0.0071
+Época   16 -> Fitness Médio 1673.3338  Fitness Máximo 1675.9182 Diferença no Fitness 0.0026
+Época   17 -> Fitness Médio 1675.0388  Fitness Máximo 1675.9270 Diferença no Fitness 0.0010
+Época   18 -> Fitness Médio 1675.6835  Fitness Máximo 1675.9270 Diferença no Fitness 0.0004
+Época   19 -> Fitness Médio 1675.8662  Fitness Máximo 1675.9315 Diferença no Fitness 0.0001
+Época   20 -> Fitness Médio 1675.9165  Fitness Máximo 1675.9315 Diferença no Fitness 0.0000
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 20: Diferença de fitness médio
+Plotando gráfico da população final da execução #1
+
+Inicando execução #2...
+Plotando gráfico da população inicial da execução #2
+Época    1 -> Fitness Médio 1047.2574  Fitness Máximo 1552.2997 Diferença no Fitness 0.2036
+Época    2 -> Fitness Médio 1128.8880  Fitness Máximo 1552.2997 Diferença no Fitness 0.0723
+Época    3 -> Fitness Médio 1186.0543  Fitness Máximo 1552.2997 Diferença no Fitness 0.0482
+Época    4 -> Fitness Médio 1232.4649  Fitness Máximo 1552.2997 Diferença no Fitness 0.0377
+Época    5 -> Fitness Médio 1264.1428  Fitness Máximo 1552.2997 Diferença no Fitness 0.0251
+Época    6 -> Fitness Médio 1295.5098  Fitness Máximo 1552.2997 Diferença no Fitness 0.0242
+Época    7 -> Fitness Médio 1320.9640  Fitness Máximo 1552.2997 Diferença no Fitness 0.0193
+Época    8 -> Fitness Médio 1340.8515  Fitness Máximo 1552.2997 Diferença no Fitness 0.0148
+Época    9 -> Fitness Médio 1365.8846  Fitness Máximo 1552.2997 Diferença no Fitness 0.0183
+Época   10 -> Fitness Médio 1393.7575  Fitness Máximo 1602.6634 Diferença no Fitness 0.0200
+Época   11 -> Fitness Médio 1421.8252  Fitness Máximo 1602.6634 Diferença no Fitness 0.0197
+Época   12 -> Fitness Médio 1447.7779  Fitness Máximo 1608.6630 Diferença no Fitness 0.0179
+Época   13 -> Fitness Médio 1461.3579  Fitness Máximo 1608.6630 Diferença no Fitness 0.0093
+Época   14 -> Fitness Médio 1473.2367  Fitness Máximo 1625.4139 Diferença no Fitness 0.0081
+Época   15 -> Fitness Médio 1482.3400  Fitness Máximo 1625.4139 Diferença no Fitness 0.0061
+Época   16 -> Fitness Médio 1490.5687  Fitness Máximo 1625.4139 Diferença no Fitness 0.0055
+Época   17 -> Fitness Médio 1511.3778  Fitness Máximo 1625.4139 Diferença no Fitness 0.0138
+Época   18 -> Fitness Médio 1544.8297  Fitness Máximo 1629.4684 Diferença no Fitness 0.0217
+Época   19 -> Fitness Médio 1577.4161  Fitness Máximo 1650.7953 Diferença no Fitness 0.0207
+Época   20 -> Fitness Médio 1599.2893  Fitness Máximo 1650.7953 Diferença no Fitness 0.0137
+Época   21 -> Fitness Médio 1614.0794  Fitness Máximo 1654.5787 Diferença no Fitness 0.0092
+Época   22 -> Fitness Médio 1623.7145  Fitness Máximo 1654.5787 Diferença no Fitness 0.0059
+Época   23 -> Fitness Médio 1630.4393  Fitness Máximo 1654.5787 Diferença no Fitness 0.0041
+Época   24 -> Fitness Médio 1638.3402  Fitness Máximo 1654.5787 Diferença no Fitness 0.0048
+Época   25 -> Fitness Médio 1644.6959  Fitness Máximo 1654.5787 Diferença no Fitness 0.0039
+Época   26 -> Fitness Médio 1648.3777  Fitness Máximo 1654.5787 Diferença no Fitness 0.0022
+Época   27 -> Fitness Médio 1650.5996  Fitness Máximo 1654.5787 Diferença no Fitness 0.0013
+Época   28 -> Fitness Médio 1652.0620  Fitness Máximo 1656.0607 Diferença no Fitness 0.0009
+Época   29 -> Fitness Médio 1652.9560  Fitness Máximo 1656.0607 Diferença no Fitness 0.0005
+Época   30 -> Fitness Médio 1653.8261  Fitness Máximo 1656.0607 Diferença no Fitness 0.0005
+Época   31 -> Fitness Médio 1654.4771  Fitness Máximo 1656.0607 Diferença no Fitness 0.0004
+Época   32 -> Fitness Médio 1655.0261  Fitness Máximo 1656.1458 Diferença no Fitness 0.0003
+Época   33 -> Fitness Médio 1655.4537  Fitness Máximo 1656.1458 Diferença no Fitness 0.0003
+Época   34 -> Fitness Médio 1655.7604  Fitness Máximo 1656.1458 Diferença no Fitness 0.0002
+Época   35 -> Fitness Médio 1655.8953  Fitness Máximo 1656.1458 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 35: Diferença de fitness médio
+Plotando gráfico da população final da execução #2
+
+Inicando execução #3...
+Plotando gráfico da população inicial da execução #3
+Época    1 -> Fitness Médio 1065.4669  Fitness Máximo 1558.4062 Diferença no Fitness 0.2201
+Época    2 -> Fitness Médio 1136.6328  Fitness Máximo 1558.4062 Diferença no Fitness 0.0626
+Época    3 -> Fitness Médio 1194.5519  Fitness Máximo 1669.2720 Diferença no Fitness 0.0485
+Época    4 -> Fitness Médio 1241.0042  Fitness Máximo 1669.2720 Diferença no Fitness 0.0374
+Época    5 -> Fitness Médio 1282.3235  Fitness Máximo 1669.2720 Diferença no Fitness 0.0322
+Época    6 -> Fitness Médio 1316.2646  Fitness Máximo 1669.2720 Diferença no Fitness 0.0258
+Época    7 -> Fitness Médio 1350.8998  Fitness Máximo 1669.2720 Diferença no Fitness 0.0256
+Época    8 -> Fitness Médio 1395.2993  Fitness Máximo 1669.2720 Diferença no Fitness 0.0318
+Época    9 -> Fitness Médio 1435.1821  Fitness Máximo 1669.2720 Diferença no Fitness 0.0278
+Época   10 -> Fitness Médio 1487.6176  Fitness Máximo 1674.2784 Diferença no Fitness 0.0352
+Época   11 -> Fitness Médio 1558.1731  Fitness Máximo 1674.2784 Diferença no Fitness 0.0453
+Época   12 -> Fitness Médio 1632.8038  Fitness Máximo 1674.5850 Diferença no Fitness 0.0457
+Época   13 -> Fitness Médio 1661.3242  Fitness Máximo 1675.9287 Diferença no Fitness 0.0172
+Época   14 -> Fitness Médio 1669.9992  Fitness Máximo 1675.9287 Diferença no Fitness 0.0052
+Época   15 -> Fitness Médio 1673.9817  Fitness Máximo 1675.9287 Diferença no Fitness 0.0024
+Época   16 -> Fitness Médio 1675.2772  Fitness Máximo 1675.9316 Diferença no Fitness 0.0008
+Época   17 -> Fitness Médio 1675.7533  Fitness Máximo 1675.9316 Diferença no Fitness 0.0003
+Época   18 -> Fitness Médio 1675.8765  Fitness Máximo 1675.9316 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 18: Diferença de fitness médio
+Plotando gráfico da população final da execução #3
+
+Inicando execução #4...
+Plotando gráfico da população inicial da execução #4
+Época    1 -> Fitness Médio 1042.1021  Fitness Máximo 1578.1598 Diferença no Fitness 0.2201
+Época    2 -> Fitness Médio 1118.6345  Fitness Máximo 1578.1598 Diferença no Fitness 0.0684
+Época    3 -> Fitness Médio 1176.4346  Fitness Máximo 1578.1598 Diferença no Fitness 0.0491
+Época    4 -> Fitness Médio 1231.4887  Fitness Máximo 1578.1598 Diferença no Fitness 0.0447
+Época    5 -> Fitness Médio 1261.3678  Fitness Máximo 1578.1598 Diferença no Fitness 0.0237
+Época    6 -> Fitness Médio 1288.8406  Fitness Máximo 1578.1598 Diferença no Fitness 0.0213
+Época    7 -> Fitness Médio 1310.0776  Fitness Máximo 1578.1598 Diferença no Fitness 0.0162
+Época    8 -> Fitness Médio 1328.4380  Fitness Máximo 1578.1598 Diferença no Fitness 0.0138
+Época    9 -> Fitness Médio 1351.8773  Fitness Máximo 1578.1598 Diferença no Fitness 0.0173
+Época   10 -> Fitness Médio 1375.5144  Fitness Máximo 1578.1598 Diferença no Fitness 0.0172
+Época   11 -> Fitness Médio 1394.3881  Fitness Máximo 1578.1598 Diferença no Fitness 0.0135
+Época   12 -> Fitness Médio 1412.3900  Fitness Máximo 1578.1598 Diferença no Fitness 0.0127
+Época   13 -> Fitness Médio 1431.5986  Fitness Máximo 1578.1598 Diferença no Fitness 0.0134
+Época   14 -> Fitness Médio 1448.1736  Fitness Máximo 1578.1598 Diferença no Fitness 0.0114
+Época   15 -> Fitness Médio 1456.3292  Fitness Máximo 1578.1598 Diferença no Fitness 0.0056
+Época   16 -> Fitness Médio 1459.5573  Fitness Máximo 1578.1598 Diferença no Fitness 0.0022
+Época   17 -> Fitness Médio 1460.4221  Fitness Máximo 1578.1598 Diferença no Fitness 0.0006
+Época   18 -> Fitness Médio 1461.4489  Fitness Máximo 1578.1598 Diferença no Fitness 0.0007
+Época   19 -> Fitness Médio 1461.5351  Fitness Máximo 1578.1598 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 19: Diferença de fitness médio
+Plotando gráfico da população final da execução #4
+
+Inicando execução #5...
+Plotando gráfico da população inicial da execução #5
+Época    1 -> Fitness Médio 1068.1102  Fitness Máximo 1541.9470 Diferença no Fitness 0.2267
+Época    2 -> Fitness Médio 1166.9010  Fitness Máximo 1541.9470 Diferença no Fitness 0.0847
+Época    3 -> Fitness Médio 1227.4457  Fitness Máximo 1541.9470 Diferença no Fitness 0.0493
+Época    4 -> Fitness Médio 1283.6644  Fitness Máximo 1546.0222 Diferença no Fitness 0.0438
+Época    5 -> Fitness Médio 1332.8534  Fitness Máximo 1555.5554 Diferença no Fitness 0.0369
+Época    6 -> Fitness Médio 1377.2813  Fitness Máximo 1557.4725 Diferença no Fitness 0.0323
+Época    7 -> Fitness Médio 1413.6640  Fitness Máximo 1557.4725 Diferença no Fitness 0.0257
+Época    8 -> Fitness Médio 1479.2431  Fitness Máximo 1557.4827 Diferença no Fitness 0.0443
+Época    9 -> Fitness Médio 1535.0373  Fitness Máximo 1557.4827 Diferença no Fitness 0.0363
+Época   10 -> Fitness Médio 1550.6107  Fitness Máximo 1557.4827 Diferença no Fitness 0.0100
+Época   11 -> Fitness Médio 1555.6084  Fitness Máximo 1557.4827 Diferença no Fitness 0.0032
+Época   12 -> Fitness Médio 1556.9632  Fitness Máximo 1557.4909 Diferença no Fitness 0.0009
+Época   13 -> Fitness Médio 1557.3575  Fitness Máximo 1557.4909 Diferença no Fitness 0.0003
+Época   14 -> Fitness Médio 1557.4486  Fitness Máximo 1557.4931 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 14: Diferença de fitness médio
+Plotando gráfico da população final da execução #5
+
+Inicando execução #6...
+Plotando gráfico da população inicial da execução #6
+Época    1 -> Fitness Médio 1033.9019  Fitness Máximo 1663.8533 Diferença no Fitness 0.2387
+Época    2 -> Fitness Médio 1126.7144  Fitness Máximo 1663.8533 Diferença no Fitness 0.0824
+Época    3 -> Fitness Médio 1171.8666  Fitness Máximo 1663.8533 Diferença no Fitness 0.0385
+Época    4 -> Fitness Médio 1204.5402  Fitness Máximo 1663.8533 Diferença no Fitness 0.0271
+Época    5 -> Fitness Médio 1232.6140  Fitness Máximo 1663.8533 Diferença no Fitness 0.0228
+Época    6 -> Fitness Médio 1263.6620  Fitness Máximo 1663.8533 Diferença no Fitness 0.0246
+Época    7 -> Fitness Médio 1300.0854  Fitness Máximo 1663.8533 Diferença no Fitness 0.0280
+Época    8 -> Fitness Médio 1334.8325  Fitness Máximo 1663.8533 Diferença no Fitness 0.0260
+Época    9 -> Fitness Médio 1361.1290  Fitness Máximo 1663.8533 Diferença no Fitness 0.0193
+Época   10 -> Fitness Médio 1390.8550  Fitness Máximo 1663.8533 Diferença no Fitness 0.0214
+Época   11 -> Fitness Médio 1429.0645  Fitness Máximo 1663.8533 Diferença no Fitness 0.0267
+Época   12 -> Fitness Médio 1454.8625  Fitness Máximo 1663.8533 Diferença no Fitness 0.0177
+Época   13 -> Fitness Médio 1465.8723  Fitness Máximo 1663.8533 Diferença no Fitness 0.0075
+Época   14 -> Fitness Médio 1475.0134  Fitness Máximo 1663.8533 Diferença no Fitness 0.0062
+Época   15 -> Fitness Médio 1488.5142  Fitness Máximo 1663.8533 Diferença no Fitness 0.0091
+Época   16 -> Fitness Médio 1512.7323  Fitness Máximo 1663.8533 Diferença no Fitness 0.0160
+Época   17 -> Fitness Médio 1534.5688  Fitness Máximo 1663.8533 Diferença no Fitness 0.0142
+Época   18 -> Fitness Médio 1545.4498  Fitness Máximo 1674.8266 Diferença no Fitness 0.0070
+Época   19 -> Fitness Médio 1551.2742  Fitness Máximo 1674.8266 Diferença no Fitness 0.0038
+Época   20 -> Fitness Médio 1555.0890  Fitness Máximo 1674.8266 Diferença no Fitness 0.0025
+Época   21 -> Fitness Médio 1557.6412  Fitness Máximo 1674.8266 Diferença no Fitness 0.0016
+Época   22 -> Fitness Médio 1559.2422  Fitness Máximo 1674.8266 Diferença no Fitness 0.0010
+Época   23 -> Fitness Médio 1559.8868  Fitness Máximo 1674.8266 Diferença no Fitness 0.0004
+Época   24 -> Fitness Médio 1560.3273  Fitness Máximo 1674.8266 Diferença no Fitness 0.0003
+Época   25 -> Fitness Médio 1561.5398  Fitness Máximo 1674.8266 Diferença no Fitness 0.0008
+Época   26 -> Fitness Médio 1561.8059  Fitness Máximo 1674.8266 Diferença no Fitness 0.0002
+Época   27 -> Fitness Médio 1564.0130  Fitness Máximo 1674.8266 Diferença no Fitness 0.0014
+Época   28 -> Fitness Médio 1565.8956  Fitness Máximo 1675.8104 Diferença no Fitness 0.0012
+Época   29 -> Fitness Médio 1567.4885  Fitness Máximo 1675.8104 Diferença no Fitness 0.0010
+Época   30 -> Fitness Médio 1568.7688  Fitness Máximo 1675.8104 Diferença no Fitness 0.0008
+Época   31 -> Fitness Médio 1574.3686  Fitness Máximo 1675.8104 Diferença no Fitness 0.0036
+Época   32 -> Fitness Médio 1582.2941  Fitness Máximo 1675.8104 Diferença no Fitness 0.0050
+Época   33 -> Fitness Médio 1592.7527  Fitness Máximo 1675.8104 Diferença no Fitness 0.0066
+Época   34 -> Fitness Médio 1616.7855  Fitness Máximo 1675.8104 Diferença no Fitness 0.0149
+Época   35 -> Fitness Médio 1657.3110  Fitness Máximo 1675.8540 Diferença no Fitness 0.0245
+Época   36 -> Fitness Médio 1671.3198  Fitness Máximo 1675.8984 Diferença no Fitness 0.0084
+Época   37 -> Fitness Médio 1674.7096  Fitness Máximo 1675.8984 Diferença no Fitness 0.0020
+Época   38 -> Fitness Médio 1675.6514  Fitness Máximo 1675.9262 Diferença no Fitness 0.0006
+Época   39 -> Fitness Médio 1675.8538  Fitness Máximo 1675.9292 Diferença no Fitness 0.0001
+Época   40 -> Fitness Médio 1675.9071  Fitness Máximo 1675.9311 Diferença no Fitness 0.0000
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 40: Diferença de fitness médio
+Plotando gráfico da população final da execução #6
+
+Inicando execução #7...
+Plotando gráfico da população inicial da execução #7
+Época    1 -> Fitness Médio 1066.0694  Fitness Máximo 1547.2744 Diferença no Fitness 0.1988
+Época    2 -> Fitness Médio 1155.8560  Fitness Máximo 1547.2744 Diferença no Fitness 0.0777
+Época    3 -> Fitness Médio 1199.4260  Fitness Máximo 1547.2744 Diferença no Fitness 0.0363
+Época    4 -> Fitness Médio 1243.3645  Fitness Máximo 1547.2744 Diferença no Fitness 0.0353
+Época    5 -> Fitness Médio 1273.5194  Fitness Máximo 1547.2744 Diferença no Fitness 0.0237
+Época    6 -> Fitness Médio 1301.9086  Fitness Máximo 1651.5264 Diferença no Fitness 0.0218
+Época    7 -> Fitness Médio 1325.0573  Fitness Máximo 1651.5264 Diferença no Fitness 0.0175
+Época    8 -> Fitness Médio 1347.2815  Fitness Máximo 1651.5264 Diferença no Fitness 0.0165
+Época    9 -> Fitness Médio 1368.6627  Fitness Máximo 1651.5264 Diferença no Fitness 0.0156
+Época   10 -> Fitness Médio 1402.3753  Fitness Máximo 1651.5264 Diferença no Fitness 0.0240
+Época   11 -> Fitness Médio 1439.6584  Fitness Máximo 1667.8616 Diferença no Fitness 0.0259
+Época   12 -> Fitness Médio 1470.9710  Fitness Máximo 1667.8616 Diferença no Fitness 0.0213
+Época   13 -> Fitness Médio 1504.7044  Fitness Máximo 1667.8616 Diferença no Fitness 0.0224
+Época   14 -> Fitness Médio 1534.8325  Fitness Máximo 1667.8616 Diferença no Fitness 0.0196
+Época   15 -> Fitness Médio 1562.7778  Fitness Máximo 1674.7466 Diferença no Fitness 0.0179
+Época   16 -> Fitness Médio 1580.9680  Fitness Máximo 1674.7559 Diferença no Fitness 0.0115
+Época   17 -> Fitness Médio 1605.5227  Fitness Máximo 1674.7559 Diferença no Fitness 0.0153
+Época   18 -> Fitness Médio 1640.6625  Fitness Máximo 1675.1052 Diferença no Fitness 0.0214
+Época   19 -> Fitness Médio 1659.1915  Fitness Máximo 1675.1052 Diferença no Fitness 0.0112
+Época   20 -> Fitness Médio 1667.5467  Fitness Máximo 1675.8943 Diferença no Fitness 0.0050
+Época   21 -> Fitness Médio 1672.3836  Fitness Máximo 1675.8943 Diferença no Fitness 0.0029
+Época   22 -> Fitness Médio 1674.2809  Fitness Máximo 1675.9136 Diferença no Fitness 0.0011
+Época   23 -> Fitness Médio 1675.1404  Fitness Máximo 1675.9136 Diferença no Fitness 0.0005
+Época   24 -> Fitness Médio 1675.6671  Fitness Máximo 1675.9243 Diferença no Fitness 0.0003
+Época   25 -> Fitness Médio 1675.8658  Fitness Máximo 1675.9292 Diferença no Fitness 0.0001
+Época   26 -> Fitness Médio 1675.9117  Fitness Máximo 1675.9313 Diferença no Fitness 0.0000
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 26: Diferença de fitness médio
+Plotando gráfico da população final da execução #7
+
+Inicando execução #8...
+Plotando gráfico da população inicial da execução #8
+Época    1 -> Fitness Médio 1061.2378  Fitness Máximo 1514.1900 Diferença no Fitness 0.2052
+Época    2 -> Fitness Médio 1124.9224  Fitness Máximo 1514.1900 Diferença no Fitness 0.0566
+Época    3 -> Fitness Médio 1182.5334  Fitness Máximo 1514.1900 Diferença no Fitness 0.0487
+Época    4 -> Fitness Médio 1210.9471  Fitness Máximo 1514.1900 Diferença no Fitness 0.0235
+Época    5 -> Fitness Médio 1236.1230  Fitness Máximo 1530.3289 Diferença no Fitness 0.0204
+Época    6 -> Fitness Médio 1265.6452  Fitness Máximo 1530.3289 Diferença no Fitness 0.0233
+Época    7 -> Fitness Médio 1293.7178  Fitness Máximo 1536.0329 Diferença no Fitness 0.0217
+Época    8 -> Fitness Médio 1320.0796  Fitness Máximo 1536.0329 Diferença no Fitness 0.0200
+Época    9 -> Fitness Médio 1345.3009  Fitness Máximo 1537.0287 Diferença no Fitness 0.0187
+Época   10 -> Fitness Médio 1372.5294  Fitness Máximo 1543.2630 Diferença no Fitness 0.0198
+Época   11 -> Fitness Médio 1397.5173  Fitness Máximo 1543.2630 Diferença no Fitness 0.0179
+Época   12 -> Fitness Médio 1423.9630  Fitness Máximo 1551.7802 Diferença no Fitness 0.0186
+Época   13 -> Fitness Médio 1439.3865  Fitness Máximo 1552.3042 Diferença no Fitness 0.0107
+Época   14 -> Fitness Médio 1449.8123  Fitness Máximo 1552.3042 Diferença no Fitness 0.0072
+Época   15 -> Fitness Médio 1458.5504  Fitness Máximo 1553.9788 Diferença no Fitness 0.0060
+Época   16 -> Fitness Médio 1474.9315  Fitness Máximo 1556.9386 Diferença no Fitness 0.0111
+Época   17 -> Fitness Médio 1482.8929  Fitness Máximo 1556.9386 Diferença no Fitness 0.0054
+Época   18 -> Fitness Médio 1511.7327  Fitness Máximo 1556.9386 Diferença no Fitness 0.0191
+Época   19 -> Fitness Médio 1537.6186  Fitness Máximo 1557.3971 Diferença no Fitness 0.0168
+Época   20 -> Fitness Médio 1547.8395  Fitness Máximo 1557.4295 Diferença no Fitness 0.0066
+Época   21 -> Fitness Médio 1553.4704  Fitness Máximo 1557.4479 Diferença no Fitness 0.0036
+Época   22 -> Fitness Médio 1555.5075  Fitness Máximo 1557.4787 Diferença no Fitness 0.0013
+Época   23 -> Fitness Médio 1556.6683  Fitness Máximo 1557.4818 Diferença no Fitness 0.0007
+Época   24 -> Fitness Médio 1557.1695  Fitness Máximo 1557.4838 Diferença no Fitness 0.0003
+Época   25 -> Fitness Médio 1557.3908  Fitness Máximo 1557.4928 Diferença no Fitness 0.0001
+Época   26 -> Fitness Médio 1557.4641  Fitness Máximo 1557.4928 Diferença no Fitness 0.0000
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 26: Diferença de fitness médio
+Plotando gráfico da população final da execução #8
+
+Inicando execução #9...
+Plotando gráfico da população inicial da execução #9
+Época    1 -> Fitness Médio 1058.1045  Fitness Máximo 1541.9269 Diferença no Fitness 0.1955
+Época    2 -> Fitness Médio 1133.9109  Fitness Máximo 1541.9269 Diferença no Fitness 0.0669
+Época    3 -> Fitness Médio 1179.0100  Fitness Máximo 1541.9269 Diferença no Fitness 0.0383
+Época    4 -> Fitness Médio 1217.0536  Fitness Máximo 1541.9269 Diferença no Fitness 0.0313
+Época    5 -> Fitness Médio 1262.8112  Fitness Máximo 1544.8052 Diferença no Fitness 0.0362
+Época    6 -> Fitness Médio 1310.1059  Fitness Máximo 1544.8052 Diferença no Fitness 0.0361
+Época    7 -> Fitness Médio 1338.2158  Fitness Máximo 1544.8052 Diferença no Fitness 0.0210
+Época    8 -> Fitness Médio 1367.6151  Fitness Máximo 1552.6553 Diferença no Fitness 0.0215
+Época    9 -> Fitness Médio 1392.4292  Fitness Máximo 1552.6553 Diferença no Fitness 0.0178
+Época   10 -> Fitness Médio 1423.5531  Fitness Máximo 1552.6553 Diferença no Fitness 0.0219
+Época   11 -> Fitness Médio 1462.7905  Fitness Máximo 1554.6439 Diferença no Fitness 0.0268
+Época   12 -> Fitness Médio 1492.5019  Fitness Máximo 1555.0214 Diferença no Fitness 0.0199
+Época   13 -> Fitness Médio 1511.9646  Fitness Máximo 1556.1980 Diferença no Fitness 0.0129
+Época   14 -> Fitness Médio 1524.3450  Fitness Máximo 1556.1980 Diferença no Fitness 0.0081
+Época   15 -> Fitness Médio 1535.3059  Fitness Máximo 1556.1980 Diferença no Fitness 0.0071
+Época   16 -> Fitness Médio 1541.4300  Fitness Máximo 1556.1980 Diferença no Fitness 0.0040
+Época   17 -> Fitness Médio 1545.5214  Fitness Máximo 1556.1980 Diferença no Fitness 0.0026
+Época   18 -> Fitness Médio 1547.9544  Fitness Máximo 1556.1980 Diferença no Fitness 0.0016
+Época   19 -> Fitness Médio 1550.3335  Fitness Máximo 1556.1980 Diferença no Fitness 0.0015
+Época   20 -> Fitness Médio 1552.0097  Fitness Máximo 1556.1980 Diferença no Fitness 0.0011
+Época   21 -> Fitness Médio 1553.1210  Fitness Máximo 1556.1980 Diferença no Fitness 0.0007
+Época   22 -> Fitness Médio 1553.8616  Fitness Máximo 1557.0044 Diferença no Fitness 0.0005
+Época   23 -> Fitness Médio 1554.4543  Fitness Máximo 1557.0154 Diferença no Fitness 0.0004
+Época   24 -> Fitness Médio 1555.0238  Fitness Máximo 1557.1837 Diferença no Fitness 0.0004
+Época   25 -> Fitness Médio 1555.4948  Fitness Máximo 1557.1837 Diferença no Fitness 0.0003
+Época   26 -> Fitness Médio 1555.8537  Fitness Máximo 1557.1837 Diferença no Fitness 0.0002
+Época   27 -> Fitness Médio 1556.1383  Fitness Máximo 1557.1837 Diferença no Fitness 0.0002
+Época   28 -> Fitness Médio 1556.4720  Fitness Máximo 1557.1837 Diferença no Fitness 0.0002
+Época   29 -> Fitness Médio 1556.7863  Fitness Máximo 1557.1837 Diferença no Fitness 0.0002
+Época   30 -> Fitness Médio 1556.9438  Fitness Máximo 1557.1837 Diferença no Fitness 0.0001
+Época   31 -> Fitness Médio 1557.0331  Fitness Máximo 1557.1837 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 31: Diferença de fitness médio
+Plotando gráfico da população final da execução #9
+
+Inicando execução #10...
+Plotando gráfico da população inicial da execução #10
+Época    1 -> Fitness Médio 1100.5497  Fitness Máximo 1462.9915 Diferença no Fitness 0.2164
+Época    2 -> Fitness Médio 1176.0924  Fitness Máximo 1462.9915 Diferença no Fitness 0.0642
+Época    3 -> Fitness Médio 1223.6695  Fitness Máximo 1536.5625 Diferença no Fitness 0.0389
+Época    4 -> Fitness Médio 1258.7953  Fitness Máximo 1536.5625 Diferença no Fitness 0.0279
+Época    5 -> Fitness Médio 1288.6029  Fitness Máximo 1536.5625 Diferença no Fitness 0.0231
+Época    6 -> Fitness Médio 1309.7011  Fitness Máximo 1536.5625 Diferença no Fitness 0.0161
+Época    7 -> Fitness Médio 1332.7100  Fitness Máximo 1536.5625 Diferença no Fitness 0.0173
+Época    8 -> Fitness Médio 1352.0595  Fitness Máximo 1536.5625 Diferença no Fitness 0.0143
+Época    9 -> Fitness Médio 1374.3727  Fitness Máximo 1536.5625 Diferença no Fitness 0.0162
+Época   10 -> Fitness Médio 1388.0141  Fitness Máximo 1536.5625 Diferença no Fitness 0.0098
+Época   11 -> Fitness Médio 1400.2451  Fitness Máximo 1540.0418 Diferença no Fitness 0.0087
+Época   12 -> Fitness Médio 1416.5067  Fitness Máximo 1556.7107 Diferença no Fitness 0.0115
+Época   13 -> Fitness Médio 1432.6419  Fitness Máximo 1556.7107 Diferença no Fitness 0.0113
+Época   14 -> Fitness Médio 1451.1349  Fitness Máximo 1556.7107 Diferença no Fitness 0.0127
+Época   15 -> Fitness Médio 1472.7450  Fitness Máximo 1556.7107 Diferença no Fitness 0.0147
+Época   16 -> Fitness Médio 1489.0995  Fitness Máximo 1557.4742 Diferença no Fitness 0.0110
+Época   17 -> Fitness Médio 1517.7161  Fitness Máximo 1557.4742 Diferença no Fitness 0.0189
+Época   18 -> Fitness Médio 1546.0876  Fitness Máximo 1557.4928 Diferença no Fitness 0.0184
+Época   19 -> Fitness Médio 1553.9980  Fitness Máximo 1557.4928 Diferença no Fitness 0.0051
+Época   20 -> Fitness Médio 1556.0467  Fitness Máximo 1557.4928 Diferença no Fitness 0.0013
+Época   21 -> Fitness Médio 1556.9243  Fitness Máximo 1557.4928 Diferença no Fitness 0.0006
+Época   22 -> Fitness Médio 1557.2278  Fitness Máximo 1557.4928 Diferença no Fitness 0.0002
+Época   23 -> Fitness Médio 1557.3656  Fitness Máximo 1557.4928 Diferença no Fitness 0.0001
+CRITÉRIO DE PARADA ATINGIDO NA ÉPOCA 23: Diferença de fitness médio
+Plotando gráfico da população final da execução #10
+
+RESULTADOS 
+Média de gerações para convergência: 25.2000 
+Plotando gráfico Fitness Médio x Geração 
+Plotando gráfico Fitness Máximo x Geração 
+Plotando gráfico Fitness Mínimo x Geração 
+
+2017-11-02 15:23:35
+FIM DO LOG

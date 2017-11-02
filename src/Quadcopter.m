@@ -9,7 +9,7 @@
 %
 % @return     an array with dx
 %
-function dx = Quadcopter(t,x,control)
+function dx = Quadcopter(t,x,control,gains,target,sp)
     % Montando o array dx que retorna da funcao
     dx = zeros(12,1);
     %{
@@ -27,28 +27,53 @@ function dx = Quadcopter(t,x,control)
         x(12) => dy/dT
     %}
     global g Km b m a Kf U_hist;
-    kp_z = 28;
-    ki_z = 0;
-    kd_z = 250;
 
-    kp_phi = 5;
-    ki_phi = 0;
-    kd_phi = 30;
+    % Valores iniciais para o PID, 1 -> kp | 2-> ki | 3-> kd
+    kz(1) = 28;
+    kz(2) = 0;
+    kz(3) = 250;
 
-    kp_theta = 5;
-    ki_theta = 0;
-    kd_theta = 30;
+    kphitheta(1) = 5;
+    kphitheta(2) = 0;
+    kphitheta(3) = 30;
 
-    kp_psi = 5;
-    ki_psi = 0;
-    kd_psi = 30;
+    kpsi(1) = 5;
+    kpsi(2) = 0;
+    kpsi(3) = 30;
 
-    % U(1) = PID([kp_z ki_z kd_z], x(7), 5, 'U1');
-    U(2) = PID([kp_phi ki_phi kd_phi], x(1), 0, 'U2');
-    U(3) = PID([kp_theta ki_theta kd_theta], x(3), 0, 'U3');
-    U(4) = PID([kp_psi ki_psi kd_psi], x(5), 0, 'U4');
+    % Valores para os setpoints
+    setpoint(1) = 4;
+    setpoint(2) = 0;
+    setpoint(3) = 0;
+    setpoint(4) = 0;
 
-    U(1) = 0;
+    % Subs quando usado o genetico
+    switch target
+        case 'z'
+            kz(1) = gains(1);
+            kz(2) = gains(2);
+            kz(3) = gains(3); 
+            setpoint(1) = sp;
+        case 'phi/theta'
+            kphitheta(1) = gains(1);
+            kphitheta(2) = gains(2);
+            kphitheta(3) = gains(3); 
+            setpoint(2) = sp;
+            setpoint(3) = sp;
+        case 'psi'
+            kpsi(1) = gains(1);
+            kpsi(2) = gains(2);
+            kpsi(3) = gains(3); 
+            setpoint(4) = sp;
+        otherwise
+    end
+
+    U(1) = PID([kz(1) kz(2) kz(3)], x(7), setpoint(1), 'U1');
+    U(2) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(1), setpoint(2), 'U2');
+    U(3) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(3), setpoint(3), 'U3');
+    U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x(5), setpoint(4), 'U4');
+
+    % U(1) = 0;
     % U(2) = 0;
     % U(3) = 0.005;
     % U(4) = 0;
