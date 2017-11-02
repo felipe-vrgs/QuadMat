@@ -31,7 +31,7 @@ function dx = Quadcopter(t,x,control)
     ki_z = 0;
     kd_z = 250;
 
-    kp_phi = 5;
+    kp_phi = 2;
     ki_phi = 0;
     kd_phi = 10;
 
@@ -44,14 +44,14 @@ function dx = Quadcopter(t,x,control)
     kd_psi = 10;
 
     % U(1) = PID([kp_z ki_z kd_z], x(7), 5, 'U1');
-    % U(2) = PID([kp_phi ki_phi kd_phi], x(1), 0, 'U2');
-    % U(3) = PID([kp_theta ki_theta kd_theta], x(3), 0, 'U3');
-    % U(4) = PID([kp_psi ki_psi kd_psi], x(5), 0, 'U4');
+    U(2) = PID([kp_phi ki_phi kd_phi], x(1), 0, 'U2');
+    U(3) = PID([kp_theta ki_theta kd_theta], x(3), 0, 'U3');
+    U(4) = PID([kp_psi ki_psi kd_psi], x(5), 0, 'U4');
 
-    U(1) = 5;
-    U(2) = 0;
-    U(3) = 0;
-    U(4) = 0;
+    U(1) = 0;
+    % U(2) = 0;
+    % U(3) = 0.005;
+    % U(4) = 0;
 
     global U_hist t_hist;
     U_hist = [U_hist; U];

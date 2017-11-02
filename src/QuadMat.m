@@ -11,7 +11,7 @@ function ExecMain
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb();
+    Ins = InsertDisturb('theta','thetadot','phi','phidot','psi','psidot');
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control),0:0.001:10,Ins);
     cacm = zeros(divisoes,divisoes);
     %{
@@ -31,23 +31,22 @@ function ExecMain
     % zlabel('z','Interpreter','Latex')
      % plot(t,X(:,7)) % Posicao do pendulo
      %plot1(cacm);
-    PlotDrone(t,X,'XYZ')
+    PlotDrone(t,X,'XYZAng')
     % PlotDrone(t,X,'Ang')
 
     global U_hist t_hist;
-    % figure()
-    % size(U_hist)
-    % size(t_hist)
-    % figure()
-    % subplot(2,2,1)
-    % plot(t_hist(:,1), U_hist(:,1))
-    % subplot(2,2,2)
-    % plot(t_hist(:,1), U_hist(:,2))
-    % subplot(2,2,3)
-    % plot(t_hist(:,1), U_hist(:,3))
-    % subplot(2,2,4)
-    % plot(t_hist(:,1), U_hist(:,4))
-    % U_hist;
+    figure()
+    size(U_hist)
+    size(t_hist)
+    subplot(2,2,1)
+    plot(t_hist(:,1), U_hist(:,1))
+    subplot(2,2,2)
+    plot(t_hist(:,1), U_hist(:,2))
+    subplot(2,2,3)
+    plot(t_hist(:,1), U_hist(:,3))
+    subplot(2,2,4)
+    plot(t_hist(:,1), U_hist(:,4))
+    U_hist;
      
 end
 

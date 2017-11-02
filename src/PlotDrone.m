@@ -8,6 +8,8 @@
 %!
 function PlotDrone(t,X,ty)
     if strcmp(ty,'XYZ')
+        PlotXYZ(t,X)
+    elseif strcmp(ty,'XYZAng')
         PlotXYZAng(t,X)
     elseif strcmp(ty,'Ang')
         PlotAngles(t,X)
