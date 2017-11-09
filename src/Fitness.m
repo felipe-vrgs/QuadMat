@@ -1,20 +1,18 @@
 %% Fitness: function description
 function fit = Fitness(target, gains, setpoint)
-	clc
 	switch target
 		case 'z'
-			disp(target);
 			[t,X] = QuadMat(gains,target,setpoint);
 			errMax = 0;
 			err = zeros(size(t));
 			for n = 1:size(t)
-				err(n) = (X(n,7) - setpoint)^2;
+				err(n) = (real(X(n,7)) - setpoint)^2;
 				errMax = errMax + err(n);
 			end
 			if errMax == 0
 				fit = 10000000;
 			else
-				fit = 1/errMax;
+				fit = (1/errMax)*2000;
 			end
 			% PlotVars(t,X(:,7),err);
 	end

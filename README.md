@@ -12,6 +12,3 @@ Some MATLAB scripts for a drone simulation, can be used via script or simulink.
 ## TODO
 
 * Close the loop for **atitude** control.
-* Make the algorithm ready for genetic optmization.
-* Fitness calc.
-* Improve the simulink model.

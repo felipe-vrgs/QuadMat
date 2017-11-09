@@ -69,14 +69,14 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     end
 
     U(1) = PID([kz(1) kz(2) kz(3)], x(7), setpoint(1), 'U1');
-    U(2) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(1), setpoint(2), 'U2');
-    U(3) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(3), setpoint(3), 'U3');
-    U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x(5), setpoint(4), 'U4');
+    % U(2) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(1), setpoint(2), 'U2');
+    % U(3) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(3), setpoint(3), 'U3');
+    % U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x(5), setpoint(4), 'U4');
 
     % U(1) = 0;
-    % U(2) = 0;
-    % U(3) = 0.005;
-    % U(4) = 0;
+    U(2) = 0;
+    U(3) = 0;
+    U(4) = 0;
 
     global U_hist t_hist;
     U_hist = [U_hist; U];

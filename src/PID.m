@@ -24,7 +24,6 @@ function [U] = PID(Gains, inp, SetPoint, Ref)
 	Kp = Gains(1);
 	Ki = Gains(2);
 	Kd = Gains(3);
-
 	% Error
 	err = SetPoint - inp;
 

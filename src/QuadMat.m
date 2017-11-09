@@ -11,7 +11,7 @@ function [t,X] = QuadMat(gains,target,setpoint)
     % zlabel('z','Interpreter','Latex')
     % plot(t,X(:,7)) % Posicao do pendulo
     % plot1(cacm);
-    % PlotDrone(t,X,'XYZAng')
+    PlotDrone(t,X,'XYZAng')
     % PlotDrone(t,X,'Ang')
 
     % global U_hist t_hist;
@@ -39,7 +39,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb('theta','thetadot','phi','phidot','psi','psidot');
+    Ins = InsertDisturb();
     [t,X] = ode45(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.001:10,Ins);
     % cacm = zeros(divisoes,divisoes);
     %{
