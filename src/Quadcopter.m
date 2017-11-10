@@ -68,19 +68,19 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
         otherwise
     end
 
-    U(1) = PID([kz(1) kz(2) kz(3)], x(7), setpoint(1), 'U1');
+    U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
     % U(2) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(1), setpoint(2), 'U2');
     % U(3) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(3), setpoint(3), 'U3');
     % U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x(5), setpoint(4), 'U4');
 
-    % U(1) = 0;
+    % U(1) = 5;
     U(2) = 0;
     U(3) = 0;
     U(4) = 0;
 
-    global U_hist t_hist;
+    global U_hist T_hist;
     U_hist = [U_hist; U];
-    t_hist = [t_hist; t];
+    T_hist = [T_hist; t];
     
 
 
@@ -110,7 +110,7 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     dx(5) = x(6);                                                               % Vel ang (ksi)
     dx(6) = b(3)*U(4) + a(5)*x(2)*x(4);                                         % Acel ang (ksi)
     dx(7) = x(8);                                                               % Vel Z
-    dx(8) = g + (U(1)/m)*(cos(x(1))*cos(x(3)));                                 % Acel Z
+    dx(8) = - g + (U(1)/m)*(cos(x(1))*cos(x(3)));                               % Acel Z
     dx(9) = x(10);                                                              % Vel X
     dx(10) = (-U(1)/m)*(sin(x(1))*sin(x(5)) + cos(x(1))*sin(x(3))*cos(x(5)));   % Acel X
     %dx(10) = (-U(1)/m)*(x(5)*sin(x(3)) - cos(x(5))*x(1));                      % Simplificação da eq de cima

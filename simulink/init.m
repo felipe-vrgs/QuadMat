@@ -1,13 +1,13 @@
 clear all
 clc
 
-g = - 9.81;       % Gravidade
-Ix = 5e-3;      % Inércia eixo X
-Iy = 5e-3;      % Inércia eixo Y
-Iz = 10e-3;     % Inércia eixo Z
-L = 0.25;       % Distância do centro até qualquer um dos motores
-Km = 3e-6;      % Cte aerodinâmica (thrust)
-Kf = 1e-7;      % Cte de arrasto (drag)
+g = -9.81;     % Gravidade
+Ix = 7.5e-3;      % Inércia eixo X
+Iy = 7.5e-3;      % Inércia eixo Y
+Iz = 1.3e-2;     % Inércia eixo Z
+L = 0.2;       % Distância do centro até qualquer um dos motores
+Km = 7.5e-7;      % Cte aerodinâmica (thrust)
+Kf = 3.13e-5;      % Cte de arrasto (drag)
 m = 0.5;        % Massa do drone
 Jr = 6e-5;      % Inércia do rotor
 % Redução de variáveis

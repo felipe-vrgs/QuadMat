@@ -1,5 +1,6 @@
 %% Fitness: function description
 function fit = Fitness(target, gains, setpoint)
+	global err_int;
 	switch target
 		case 'z'
 			[t,X] = QuadMat(gains,target,setpoint);

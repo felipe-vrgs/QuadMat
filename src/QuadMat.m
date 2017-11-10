@@ -5,28 +5,10 @@ function [t,X] = QuadMat(gains,target,setpoint)
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
     % grid on
-    % title('Posicao Drone','Interpreter','Latex')
-    % ylabel('y','Interpreter','Latex')
-    % xlabel('x','Interpreter','Latex')
-    % zlabel('z','Interpreter','Latex')
-    % plot(t,X(:,7)) % Posicao do pendulo
     % plot1(cacm);
     PlotDrone(t,X,'XYZAng')
+    PlotDrone([],[],'U')
     % PlotDrone(t,X,'Ang')
-
-    % global U_hist t_hist;
-    % figure()
-    % size(U_hist)
-    % size(t_hist)
-    % subplot(2,2,1)
-    % plot(t_hist(:,1), U_hist(:,1))
-    % subplot(2,2,2)
-    % plot(t_hist(:,1), U_hist(:,2))
-    % subplot(2,2,3)
-    % plot(t_hist(:,1), U_hist(:,3))
-    % subplot(2,2,4)
-    % plot(t_hist(:,1), U_hist(:,4))
-    % U_hist;
 end
 
 
@@ -40,7 +22,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
     %}
     Control = 'PID';
     Ins = InsertDisturb();
-    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.001:10,Ins);
+    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins);
     % cacm = zeros(divisoes,divisoes);
     %{
     	for k=1:length(t)
@@ -114,7 +96,7 @@ function SetGlobals()
     
     % Ctes do modelo
     global g L Kf Km m a b;
-    g = -9.81;     % Gravidade
+    g = 9.81;     % Gravidade
     Ix = 7.5e-3;      % Inércia eixo X
     Iy = 7.5e-3;      % Inércia eixo Y
     Iz = 1.3e-2;     % Inércia eixo Z
@@ -135,8 +117,14 @@ function SetGlobals()
     b(3) = L/Iz;
 
     % Ctes do controle
-    global err_ant err_int windup;
+    global err_ant err_int windup t_ant err_dot;
     err_ant = zeros(4,1);
-    windup = [10 10 10 10];
+    windup = [15 1 1 1];
     err_int = zeros(4,1);
+    err_dot = zeros(4,1);
+    t_ant = zeros(4,1);
+
+    global U_hist T_hist;
+    U_hist = [];
+    T_hist = [];
 end

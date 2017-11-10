@@ -17,8 +17,25 @@ function PlotDrone(t,X,ty)
         PlotXYZVel(t,X)
     elseif strcmp(ty,'VelAng')
         PlotAngVel(t,X)
+    elseif strcmp(ty,'U')
+        PlotU()
     end
 end
+
+%% PlotU: function description
+function PlotU()
+   global U_hist T_hist;
+    figure()
+    subplot(2,2,1)
+    plot(T_hist(:,1), U_hist(:,1))
+    subplot(2,2,2)
+    plot(T_hist(:,1), U_hist(:,2))
+    subplot(2,2,3)
+    plot(T_hist(:,1), U_hist(:,3))
+    subplot(2,2,4)
+    plot(T_hist(:,1), U_hist(:,4))
+end
+
 
 function PlotXYZ(t,X)
     figure()

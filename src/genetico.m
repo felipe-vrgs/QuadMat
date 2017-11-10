@@ -2,12 +2,12 @@
 function [gainsOut, fitOut] = Genetico(Target,SetPoint)
     global Individuos NumGenes SelectedInd Pai1 Pai2 Filhos1 Filhos2 Filhos3 FitnessPai FitnessFilhos3 FitnessFilhos1 FitnessFilhos2;
     % Definição das constantes
-    Geracoes = 20;
-    Individuos = 12;
+    Geracoes = 15;
+    Individuos = 8;
     NumGenes = 3; % Kp Kd e Ki
     % Iniciando os arrays para as informações do genético
-    OldFit = zeros(Individuos);
-    FitnessIn = zeros(Individuos);
+    OldFit = zeros(Geracoes,Individuos);
+    FitnessIn = zeros(1,Individuos);
     Gains = zeros(Geracoes,Individuos,NumGenes);
     Selected = zeros(Geracoes,Individuos,NumGenes);
     SelectedInd = Individuos/2;
@@ -26,26 +26,32 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
         % Se for a primeira tem que calcular o fitness e gerar randômico os valores dos genes
         if (G == 1)
             for I = 1:Individuos
-                Gains(G,I,1) = 5*rand(); % Kp
+                Gains(G,I,1) = rand(); % Kp
                 Gains(G,I,2) = rand(); % Ki
-                Gains(G,I,3) = 15*rand(); % Kd
+                Gains(G,I,3) = rand(); % Kd
                 disp(['Calculando Fitness do individuo: ',num2str(I)])
-                FitnessIn(I) =  Fitness(Target,Gains(1,I,:),SetPoint);
+                FitnessIn(1,I) =  Fitness(Target,Gains(1,I,:),SetPoint);
                 disp(['Valor do Fitness do individuo: ',num2str(FitnessIn(I))])
             end
         else
             % Caso contrário pega o retorno da função de seleção
             Gains(G,:,:) =  Selected(G-1,:,:);
-            Gains(G,1,:)
-            FitnessIn(:) = OldFit(:)
+            FitnessIn(1,:) = OldFit(G-1,:);
         end
         % Faz a seleção, crossover, mutação e etc
-        [Selected(G,:,:), OldFit(:)] = Select(Gains(G,:,:),SetPoint,Target,FitnessIn(:));
+        [Selected(G,:,:), OldFit(G,:)] = Select(Gains(G,:,:),SetPoint,Target,FitnessIn(1,:));
         % Selected
         if (G == Geracoes)
             Selected(G,1,:)
         end
     end
+    figure()
+    plot(1:1:Geracoes, OldFit(:,1)) % Melhor fitness por geração
+    title('Evolu\c{c}\~{a}o do Fitness','Interpreter','Latex')
+    ylabel('Fitness','Interpreter','Latex')
+    xlabel('Gera\c{c}\~{a}o','Interpreter','Latex')
+    grid on
+    PlotDrone([],[],'U')
 end
 
 %% Select: Seleciona os melhores, faz crossover e mutação, seleciona novamente e retorna
@@ -54,7 +60,7 @@ function [Selected, OldFit] = Select(Gains,SetPoint,Target,FitnessIn)
     global Individuos NumGenes SelectedInd Pai1 Pai2 Filhos1 Filhos2 Filhos3 FitnessPai FitnessFilhos3 FitnessFilhos1 FitnessFilhos2;
     % Define as variáveis de saída
     Selected = zeros(1,Individuos,NumGenes);
-    OldFit = zeros(Individuos);
+    OldFit = zeros(1,Individuos);
     % Fazendo a primeira seleção (somente os pais com o melhor fitness que continuam) 
     [BestFitIn,OldIdxIn] = sort(FitnessIn,'descend');
     % Crossover usando os melhores pais
@@ -96,17 +102,17 @@ function [Selected, OldFit] = Select(Gains,SetPoint,Target,FitnessIn)
     % O for só reorganiza as informações para serem retornadas pela função
     for S = 1:(PopSize(1)/2)
         Selected(:,S,:) = Population(OldI(S),:);
-        OldFit(S) = BestFit(S);
+        OldFit(:,S) = BestFit(S);
     end
 end
 
-%% Mutation: function description
+%% Mutation: Realiza a mutação
 function [NewVal] = Mutation(OldVal)
     % Chance de ocorrer mutação (Ex: 0.15 -> 15%)
     Chance = 0.15;
     if (rand < Chance)
         % Caso ocorra mutação faz uma soma ou subtração de 0 a 200% do valor original
-        NewVal = OldVal  + (4*rand() - 1.9)*OldVal;
+        NewVal = abs(OldVal  + (2*rand() - 0.9)*OldVal);
     else
         NewVal = OldVal;
     end
