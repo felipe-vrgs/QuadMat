@@ -3,7 +3,7 @@ function fit = Fitness(target, gains, setpoint)
 	global err_int;
 	switch target
 		case 'z'
-			[t,X] = QuadMat(gains,target,setpoint);
+			[t,X] = QuadMat(gains,target,setpoint,0);
 			errMax = 0;
 			err = zeros(size(t));
 			for n = 1:size(t)

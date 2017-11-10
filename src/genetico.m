@@ -2,8 +2,8 @@
 function [gainsOut, fitOut] = Genetico(Target,SetPoint)
     global Individuos NumGenes SelectedInd Pai1 Pai2 Filhos1 Filhos2 Filhos3 FitnessPai FitnessFilhos3 FitnessFilhos1 FitnessFilhos2;
     % Definição das constantes
-    Geracoes = 15;
-    Individuos = 8;
+    Geracoes = 30;
+    Individuos = 10;
     NumGenes = 3; % Kp Kd e Ki
     % Iniciando os arrays para as informações do genético
     OldFit = zeros(Geracoes,Individuos);

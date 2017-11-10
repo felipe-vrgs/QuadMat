@@ -1,13 +1,18 @@
 %% Main function, describes the global variables and does the simulation
 %% QuadMat: function description
-function [t,X] = QuadMat(gains,target,setpoint)
+function [t,X] = QuadMat(gains,target,setpoint,plotGraphs)
+    if nargin == 3
+        plotGraphs = 1;
+    end
     [t,X] = ExecMain(gains,target,setpoint);
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
     % grid on
     % plot1(cacm);
-    PlotDrone(t,X,'XYZAng')
-    PlotDrone([],[],'U')
+    if plotGraphs == 1
+        PlotDrone(t,X,'XYZAng')
+        PlotDrone([],[],'U')
+    end
     % PlotDrone(t,X,'Ang')
 end
 
@@ -22,7 +27,8 @@ function [t,X] = ExecMain(gains,target,setpoint)
     %}
     Control = 'PID';
     Ins = InsertDisturb();
-    [t,X] = ode45(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins);
+    options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',1);
+    [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
     % cacm = zeros(divisoes,divisoes);
     %{
     	for k=1:length(t)
@@ -117,12 +123,13 @@ function SetGlobals()
     b(3) = L/Iz;
 
     % Ctes do controle
-    global err_ant err_int windup t_ant err_dot;
+    global err_ant err_int windup t_ant err_dot U_ant;
     err_ant = zeros(4,1);
     windup = [15 1 1 1];
     err_int = zeros(4,1);
     err_dot = zeros(4,1);
     t_ant = zeros(4,1);
+    U_ant = zeros(4,1);
 
     global U_hist T_hist;
     U_hist = [];
