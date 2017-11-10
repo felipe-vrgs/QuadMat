@@ -29,20 +29,24 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     global g Km b m a Kf U_hist;
 
     % Valores iniciais para o PID, 1 -> kp | 2-> ki | 3-> kd
-    kz(1) = 28;
-    kz(2) = 0;
-    kz(3) = 250;
+    kz(1) = 10.5183;
+    kz(2) = 0.0046;
+    kz(3) = 3.633;
 
-    kphitheta(1) = 5;
-    kphitheta(2) = 0;
-    kphitheta(3) = 30;
+    kphi(1) = 2.4932;
+    kphi(2) = 0;
+    kphi(3) = 1.8975;
 
-    kpsi(1) = 5;
+    ktheta(1) = 1.1783;
+    ktheta(2) = 0;
+    ktheta(3) = 1.2595;
+
+    kpsi(1) = 1.8509;
     kpsi(2) = 0;
-    kpsi(3) = 30;
+    kpsi(3) = 1.6949;
 
     % Valores para os setpoints
-    setpoint(1) = 4;
+    setpoint(1) = 2;
     setpoint(2) = 0;
     setpoint(3) = 0;
     setpoint(4) = 0;
@@ -54,11 +58,15 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
             kz(2) = gains(2);
             kz(3) = gains(3); 
             setpoint(1) = sp;
-        case 'phi/theta'
-            kphitheta(1) = gains(1);
-            kphitheta(2) = gains(2);
-            kphitheta(3) = gains(3); 
+        case 'phi'
+            kphi(1) = gains(1);
+            kphi(2) = gains(2);
+            kphi(3) = gains(3); 
             setpoint(2) = sp;
+        case 'theta'
+            ktheta(1) = gains(1);
+            ktheta(2) = gains(2);
+            ktheta(3) = gains(3); 
             setpoint(3) = sp;
         case 'psi'
             kpsi(1) = gains(1);
@@ -69,14 +77,14 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     end
 
     U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
-    % U(2) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(1), setpoint(2), 'U2');
-    % U(3) = PID([kphitheta(1) kphitheta(2) kphitheta(3)], x(3), setpoint(3), 'U3');
-    % U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x(5), setpoint(4), 'U4');
+    U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
+    U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
+    U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);
 
     % U(1) = 5;
-    U(2) = 0;
-    U(3) = 0;
-    U(4) = 0;
+    % U(2) = 0;
+    % U(3) = 0;
+    % U(4) = 0;
 
     global U_hist T_hist;
     U_hist = [U_hist; U];
@@ -104,9 +112,9 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
 
     % Equações de esp. estados
     dx(1) = x(2);                                                               % Vel ang (phi)
-    dx(2) = b(1)*U(2) - x(4)*Omega*a(2) + a(1)*x(4)*x(6);                       % Acel ang (phi)
+    dx(2) = b(1)*U(2)  + a(1)*x(4)*x(6);                                        % Acel ang (phi)
     dx(3) = x(4);                                                               % Vel ang (theta) 
-    dx(4) = b(2)*U(3) + x(2)*Omega*a(4) + a(3)*x(2)*x(6);                       % Acel ang (theta) 
+    dx(4) = b(2)*U(3)  + a(3)*x(2)*x(6);                                        % Acel ang (theta) 
     dx(5) = x(6);                                                               % Vel ang (ksi)
     dx(6) = b(3)*U(4) + a(5)*x(2)*x(4);                                         % Acel ang (ksi)
     dx(7) = x(8);                                                               % Vel Z

@@ -13,9 +13,47 @@ function fit = Fitness(target, gains, setpoint)
 			if errMax == 0
 				fit = 10000000;
 			else
-				fit = (1/errMax)*2000;
+				fit = (1/errMax)*2000*20;
 			end
-			% PlotVars(t,X(:,7),err);
+		case 'phi'
+			[t,X] = QuadMat(gains,target,setpoint,0);
+			errMax = 0;
+			err = zeros(size(t));
+			for n = 1:size(t)
+				err(n) = (real(X(n,1)) - setpoint)^2;
+				errMax = errMax + err(n);
+			end
+			if errMax == 0
+				fit = 10000000;
+			else
+				fit = (1/errMax)*20;
+			end
+		case 'theta'	
+			[t,X] = QuadMat(gains,target,setpoint,0);
+			errMax = 0;
+			err = zeros(size(t));
+			for n = 1:size(t)
+				err(n) = (real(X(n,3)) - setpoint)^2;
+				errMax = errMax + err(n);
+			end
+			if errMax == 0
+				fit = 10000000;
+			else
+				fit = (1/errMax)*20;
+			end
+		case 'psi'	
+			[t,X] = QuadMat(gains,target,setpoint,0);
+			errMax = 0;
+			err = zeros(size(t));
+			for n = 1:size(t)
+				err(n) = (real(X(n,5)) - setpoint)^2;
+				errMax = errMax + err(n);
+			end
+			if errMax == 0
+				fit = 10000000;
+			else
+				fit = (1/errMax)*20;
+			end
 	end
 end
 

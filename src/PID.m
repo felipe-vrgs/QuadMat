@@ -8,7 +8,7 @@
 %
 % @return     U			Esforço de controle
 %
-function [U] = PID(Gains, x, SetPoint, Ref, t)7
+function [U] = PID(Gains, x, SetPoint, Ref, t)
 	% Globais do PID
 	global err_ant err_int windup t_ant err_dot U_ant;
 	% Pegando as variáveis de acordo com quem chamou a função
@@ -33,10 +33,10 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)7
 	limitInt = 50;
 	% Passo de tempo atual
 	dt = t - t_ant(idx);
+	% Calcula-se o erro
+	err = SetPoint - trgt;
 	% Tem que verificar se o tempo foi pra frente (os algoritmos ode tem esse comportamento de não seguirem o tempo de forma linear)
 	if (t > t_ant(idx))
-		% Calcula-se o erro
-		err = SetPoint - trgt;
 		% Erro integrativo acumulado
 	    err_int(idx) = err_int(idx) + err*dt;
 	    % Limitação do erro integrativo (anti-windup)
@@ -88,11 +88,10 @@ function [U] = Err2U(val, x, Ref)
 	if strcmp(Ref,'U1')
 		U = (val+g)*m/(cos(x(1))*cos(x(3)));
 	elseif strcmp(Ref,'U2')
-		% U = (val+g)*m/(cos(x(1))*cos(x(3)));
+		U = (val-a(1)*x(6)*x(4))/b(1);
 	elseif strcmp(Ref,'U3')
-		% U = (val+g)*m/(cos(x(1))*cos(x(3)));
+		U = (val-a(3)*x(2)*x(6))/b(2);
 	elseif strcmp(Ref,'U4')
-		% U = (val+g)*m/(cos(x(1))*cos(x(3)));
+		U = (val-a(5)*x(2)*x(4))/b(3);
 	end
 end
-

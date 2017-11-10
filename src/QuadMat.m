@@ -26,7 +26,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
         com as condições iniciais do sistema.
     %}
     Control = 'PID';
-    Ins = InsertDisturb();
+    Ins = InsertDisturb('theta','psi','phi');
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',1);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
     % cacm = zeros(divisoes,divisoes);
