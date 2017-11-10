@@ -1,12 +1,14 @@
-%% Plot: functions descriptions
-%! @brief      Plot the values on graphs
-%!
-%! @param      t     time vector
-%! @param      X     the x1 and x2 data
-%!
-%! @return     graphs
-%!
+% PlotDrone: Funão que realiza a plotagem dos gráficos.
+%
+% @param      t     Tempo
+% @param      X     X
+% @param      ty    Tipo do gráfico
+%
+% @return     graphs !
+%
 function PlotDrone(t,X,ty)
+    % Verifica qual é o tipo e redireciona para a função correta
+    % Não vou entrar muito em detalhes nesse arquivo tendo em vista que as funções são bem simples
     if strcmp(ty,'XYZ')
         PlotXYZ(t,X)
     elseif strcmp(ty,'XYZAng')

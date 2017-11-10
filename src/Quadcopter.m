@@ -1,13 +1,16 @@
-% Quadcopter: function description !  
-% 
-% @brief      Describes the space state equations !
+% Quadcopter: Modelo em espaço de estados do quadricóptero
 %
-% @param      t     time vector !
-% @param      x     inital conditions !
-% @param      U     entrys
-% @param      x     inital conditions !
+% @brief      Descrição das equações de espaço de estados e aplicação de controle
+%             PID
+%             
+% @param      t        Tempo
+% @param      x        Condições Iniciais
+% @param      control  Qual controlador será usado (para quando tiver mais que um) 
+% @param      gains    Ganhos do controlador (para o genético)
+% @param      target   Malha que deve se inserir os ganhos (para o genético)
+% @param      sp       Set Point
 %
-% @return     an array with dx
+% @return     A matriz com as derivadas
 %
 function dx = Quadcopter(t,x,control,gains,target,sp)
     % Montando o array dx que retorna da funcao
@@ -29,6 +32,7 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     global g Km b m a Kf U_hist;
 
     % Valores iniciais para o PID, 1 -> kp | 2-> ki | 3-> kd
+    % Esses valores já sao os otimizados com o AG
     kz(1) = 10.5183;
     kz(2) = 0.0046;
     kz(3) = 3.633;
@@ -45,7 +49,7 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     kpsi(2) = 0;
     kpsi(3) = 1.6949;
 
-    % Valores para os setpoints
+    % Valores para os setpoints (2 para a altura e os ângulos devem ficar estáveis em 0)
     setpoint(1) = 2;
     setpoint(2) = 0;
     setpoint(3) = 0;
@@ -76,35 +80,22 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
         otherwise
     end
 
+    % As 4 malhas de controle já fechadas e aplicadas nos esforços de controle
     U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
     U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
     U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
     U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);
 
-    % U(1) = 5;
-    % U(2) = 0;
-    % U(3) = 0;
-    % U(4) = 0;
-
+    % Para conseguir plotar o esforço de controle depois
     global U_hist T_hist;
     U_hist = [U_hist; U];
     T_hist = [T_hist; t];
     
-
-
-    % W é a vel angular em cada motor
+    % Calculando a velocidade angular dos motores para os esforços de controle obtidos.
     W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
     W(2) = ((U(1)/(4*Kf)) - (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);
     W(3) = ((U(1)/(4*Kf)) - (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
-    W(4) = ((U(1)/(4*Kf)) + (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);
-
-    % Matriz U das entradas
-    % U(1) = Kf*(W(1)^2 + W(2)^2 + W(3)^2 + W(4)^2);   % Total Thrust
-    % U(2) = Kf*(W(4)^2 - W(2)^2);                     % Roll
-    % U(3) = Kf*(- W(3)^2 + W(1)^2);                   % Pitch
-    % U(4) = Km*(W(1)^2 - W(2)^2 + W(3)^2 - W(4)^2);   % Yaw
-    % U = [5 0 2 0];
-                                                
+    W(4) = ((U(1)/(4*Kf)) + (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);                    
   
     
     % Omega é a velocidade relativa do motor
@@ -116,14 +107,12 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     dx(3) = x(4);                                                               % Vel ang (theta) 
     dx(4) = b(2)*U(3)  + a(3)*x(2)*x(6);                                        % Acel ang (theta) 
     dx(5) = x(6);                                                               % Vel ang (ksi)
-    dx(6) = b(3)*U(4) + a(5)*x(2)*x(4);                                         % Acel ang (ksi)
+    dx(6) = b(3)*U(4)  + a(5)*x(2)*x(4);                                        % Acel ang (ksi)
     dx(7) = x(8);                                                               % Vel Z
     dx(8) = - g + (U(1)/m)*(cos(x(1))*cos(x(3)));                               % Acel Z
     dx(9) = x(10);                                                              % Vel X
     dx(10) = (-U(1)/m)*(sin(x(1))*sin(x(5)) + cos(x(1))*sin(x(3))*cos(x(5)));   % Acel X
-    %dx(10) = (-U(1)/m)*(x(5)*sin(x(3)) - cos(x(5))*x(1));                      % Simplificação da eq de cima
     dx(11) = x(12);                                                             % Vel Y
     dx(12) = (U(1)/m)*(sin(x(1))*cos(x(5)) - cos(x(1))*sin(x(3))*sin(x(5)));    % Acel Y
-    %dx(12) = (-U(1)/m)*(x(1)*sin(x(5)) + x(5)*sin(x(3)));                      % Simplificação da eq de cima
 end
 

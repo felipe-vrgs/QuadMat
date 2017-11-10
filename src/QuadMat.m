@@ -7,13 +7,10 @@ function [t,X] = QuadMat(gains,target,setpoint,plotGraphs)
     [t,X] = ExecMain(gains,target,setpoint);
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
-    % grid on
-    % plot1(cacm);
     if plotGraphs == 1
         PlotDrone(t,X,'XYZAng')
         PlotDrone([],[],'U')
     end
-    % PlotDrone(t,X,'Ang')
 end
 
 
@@ -29,15 +26,6 @@ function [t,X] = ExecMain(gains,target,setpoint)
     Ins = InsertDisturb('theta','psi','phi');
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',1);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
-    % cacm = zeros(divisoes,divisoes);
-    %{
-    	for k=1:length(t)
-            x1 = X(k,3)
-            x2 = X(k,4)
-            [i,j] = AchaCelula(x1,x2);
-            cacm(i,j) = cacm(i,j) + 1;
-        end
-    %}
 end
 
 %% InsertDisturb: function description
@@ -76,6 +64,7 @@ end
 %% SetGlobals: function description
 function SetGlobals()
     % Aqui são definidas as variáveis globais do sistema
+    % CACM
     global divisoes x1ini x1fim x1divs x2ini x2fim x2divs x1delta x2delta numCores CodigoCores;
     numCores = 85;
     CodigoCores = zeros(numCores,3); % cores RGB
@@ -89,18 +78,8 @@ function SetGlobals()
     x2ini=-4; x2fim=4;  x2divs=divisoes;
     x1delta=(x1fim-x1ini)/(x1divs);
     x2delta=(x2fim-x2ini)/(x2divs);
-    %{    
-    fprintf('\n\nValores do estado x1:\n');
-    for n=1:divisoes
-        fprintf('[%g] = %g a %g\n',n,x1ini+(n-1)*x1delta,x1ini+n*x1delta);
-    end
-    fprintf('\nValores do estado x2:\n');
-    for n=1:divisoes
-        fprintf('[%g] = %g a %g\n',n,x2ini+(n-1)*x2delta,x2ini+n*x2delta);
-    end
-    %}
     
-    % Ctes do modelo
+    % Drone
     global g L Kf Km m a b;
     g = 9.81;     % Gravidade
     Ix = 7.5e-3;      % Inércia eixo X
@@ -122,7 +101,7 @@ function SetGlobals()
     b(2) = L/Iy;
     b(3) = L/Iz;
 
-    % Ctes do controle
+    % PID
     global err_ant err_int windup t_ant err_dot U_ant;
     err_ant = zeros(4,1);
     windup = [15 1 1 1];
@@ -131,6 +110,7 @@ function SetGlobals()
     t_ant = zeros(4,1);
     U_ant = zeros(4,1);
 
+    % Plotagem
     global U_hist T_hist;
     U_hist = [];
     T_hist = [];

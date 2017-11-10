@@ -1,6 +1,19 @@
-%% Fitness: function description
+% Fitness: function description
+%
+% @param      target    Quem será controlado
+% @param      gains     Os ganhos do PID
+% @param      setpoint  O SetPoint
+%
+% @return     O fitness
+%
 function fit = Fitness(target, gains, setpoint)
 	global err_int;
+	%{ 
+	 Apesar do código estar pronto para um fitness diferente por malha foi utilizada a mesma equação, ou seja, apenas a soma do erro é levada em conta no fitness
+	 No caso do Z o fitness é multiplicado por 2000*20 para que a sua escala fique mais agradável, tendo em vista que o seu erro seria alto 
+	 por ser uma malha lenta que possui valores grandes, o que é diferente para os ângulos, tendo em vista que apresentam uma variação média entre -0.32 e 0.32.
+	%} 
+	vista
 	switch target
 		case 'z'
 			[t,X] = QuadMat(gains,target,setpoint,0);
@@ -55,21 +68,4 @@ function fit = Fitness(target, gains, setpoint)
 				fit = (1/errMax)*20;
 			end
 	end
-end
-
-function PlotVars(t,act,Err)
-    figure()
-    subplot(2,1,1)
-    plot(t,act) % Posição em X
-    title('Posi\c{c}\~{a}o em Z','Interpreter','Latex')
-    ylabel('Z','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    subplot(2,1,2)
-    plot(t,Err) % Posição em Y
-    title('Varia\c{c}\~{a}o do erro','Interpreter','Latex')
-    ylabel('E','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    suptitle('Função custo')
 end
