@@ -84,6 +84,7 @@ end
 %% Err2U: Pega o erro devolve o esforço de controle.
 function [U] = Err2U(val, x, Ref)
 	% Só isola o valor de cada U das equações de espaço de estados
+	% TODO: Fazer o omegar vir nessa equação
     global g L Kf Km m a b;
 	if strcmp(Ref,'U1')
 		U = (val+g)*m/(cos(x(1))*cos(x(3)));

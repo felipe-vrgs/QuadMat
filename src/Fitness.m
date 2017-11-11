@@ -13,7 +13,6 @@ function fit = Fitness(target, gains, setpoint)
 	 No caso do Z o fitness é multiplicado por 2000*20 para que a sua escala fique mais agradável, tendo em vista que o seu erro seria alto 
 	 por ser uma malha lenta que possui valores grandes, o que é diferente para os ângulos, tendo em vista que apresentam uma variação média entre -0.32 e 0.32.
 	%} 
-	vista
 	switch target
 		case 'z'
 			[t,X] = QuadMat(gains,target,setpoint,0);

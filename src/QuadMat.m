@@ -18,31 +18,33 @@ function [t,X] = ExecMain(gains,target,setpoint)
     SetGlobals();
     global divisoes;
     %{
-        A função ode45 aceita como primeiro parâmetro as derivadas do espaço
-        de estados, como segundo o tempo de simulação e o terceiro é um array
-        com as condições iniciais do sistema.
+        Era utilizado a ODE45, porém ela realiza muitos passos retroativos (o que estava distorcendo o sinal de esforço de controle) e também
+        não funciona muito bem com sistemas com tolerancia alta.
+        Portanto estou usando a ODE23 agora, ela tem a mesma função da 45 porém é recomendada para o uso nesses casos.
+        Referência: https://www.mathworks.com/help/matlab/math/choose-an-ode-solver.html
     %}
     Control = 'PID';
     Ins = InsertDisturb('theta','psi','phi');
-    options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',1);
+    % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
+    options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
 end
 
-%% InsertDisturb: function description
+%% InsertDisturb: Insere um disturbio nos argumentos passados
 function [in] = InsertDisturb(varargin)
     in = [0 0 0 0 0 0 0 0 0 0 0 0];
     for n = 1:nargin
         val = varargin(n);
         if strcmp(val,'phi')
-            in(1) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(1) = 0.18; % -0.17453 + 2*rand(1,1)*0.17453% -10 a 10º de disturbio
         elseif strcmp(val,'phidot')
             in(2) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'theta')
-            in(3) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(3) = 0.18; % -10 a 10º de disturbio
         elseif strcmp(val,'thetadot')
             in(4) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'psi')
-            in(5) = -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(5) = 0.18; % -10 a 10º de disturbio
         elseif strcmp(val,'psidot')
             in(6) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'z')
