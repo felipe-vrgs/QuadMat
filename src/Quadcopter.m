@@ -37,10 +37,6 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     kz(2) = 0.0046;
     kz(3) = 3.633;
 
-    kphi(1) = 2.4932;
-    kphi(2) = 0;
-    kphi(3) = 1.8975;
-
     kphi(1) = 171.9776;
     kphi(2) = 0.3107;
     kphi(3) = 30.0775;
