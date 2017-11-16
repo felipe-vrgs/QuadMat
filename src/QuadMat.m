@@ -25,7 +25,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
         Referência: https://www.mathworks.com/help/matlab/math/choose-an-ode-solver.html
     %}
     Control = 'PID';
-    Ins = InsertDisturb(); %'phi','theta','psi'
+    Ins = InsertDisturb('phi','theta','psi'); %
     % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
@@ -37,15 +37,15 @@ function [in] = InsertDisturb(varargin)
     for n = 1:nargin
         val = varargin(n);
         if strcmp(val,'phi')
-            in(1) =  -0.18; % -0.17453 + 2*rand(1,1)*0.17453  -10 a 10º de disturbio
+            in(1) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'phidot')
             in(2) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'theta')
-            in(3) =  -0.18; % -10 a 10º de disturbio
+            in(3) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'thetadot')
             in(4) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'psi')
-            in(5) =  -0.18; % -10 a 10º de disturbio
+            in(5) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
         elseif strcmp(val,'psidot')
             in(6) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'z')

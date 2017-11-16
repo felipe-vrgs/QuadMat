@@ -21,12 +21,11 @@ function fit = Fitness(target, gains, setpoint, p)
 	err = zeros(size(t));
 	chkVar = zeros(size(t));
 	Kfit = 30;
-	KOS = 2;
+	KOS = 400;
 	switch target
 		case 'z'
 			chkVar(:) = X(:,7);
 			Kfit = 2000*2;
-			KOS = 400;
 		case 'phi'
 			chkVar(:) = X(:,1);
 		case 'theta'	
@@ -47,7 +46,11 @@ function fit = Fitness(target, gains, setpoint, p)
 		osValue = max(chkVar);
 	end
 	if p == 1
-		osValue
+		if setpoint ~= 0
+			((osValue - setpoint)/setpoint)*100
+		else 
+			osValue*100
+		end
 	end
 	errMax = errMax + (abs(osValue - setpoint)^2)*KOS;
 	if errMax == 0

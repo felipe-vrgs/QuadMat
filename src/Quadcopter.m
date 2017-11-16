@@ -33,21 +33,21 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
 
     % Valores iniciais para o PID, 1 -> kp | 2-> ki | 3-> kd
     % Esses valores já sao os otimizados com o AG
-    kz(1) = 14.3096;
+    kz(1) = 14.9288;
     kz(2) = 0;
-    kz(3) = 4.0135;
+    kz(3) = 5.5701;
 
-    kphi(1) = 35.7961;
+    kphi(1) = 14.4373;
     kphi(2) = 0;
-    kphi(3) = 9.3163;
+    kphi(3) = 5.5191;
 
-    ktheta(1) = 37.2945;
-    ktheta(2) = 0.1017;
-    ktheta(3) = 10.007;
+    ktheta(1) = 14.9288;
+    ktheta(2) = 0;
+    ktheta(3) = 5.5701;
 
-    kpsi(1) = 44.1832;
+    kpsi(1) = 14.1932;
     kpsi(2) = 0;
-    kpsi(3) = 13.3274;
+    kpsi(3) = 5.2266;
 
     % Valores para os setpoints (2 para a altura e os ângulos devem ficar estáveis em 0)
     setpoint(1) = 2;
