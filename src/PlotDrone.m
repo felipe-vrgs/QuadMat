@@ -21,6 +21,8 @@ function PlotDrone(t,X,ty)
         PlotAngVel(t,X)
     elseif strcmp(ty,'U')
         PlotU()
+    elseif strcmp(ty,'W')
+        PlotW()
     end
 end
 
@@ -30,14 +32,57 @@ function PlotU()
     figure()
     subplot(2,2,1)
     plot(T_hist(:,1), U_hist(:,1))
+    title('Empuxo Vertical','Interpreter','Latex')
+    ylabel('U1','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,2)
     plot(T_hist(:,1), U_hist(:,2))
+    title('Rolagem','Interpreter','Latex')
+    ylabel('U2','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,3)
     plot(T_hist(:,1), U_hist(:,3))
+    title('Arfagem','Interpreter','Latex')
+    ylabel('U3','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,4)
     plot(T_hist(:,1), U_hist(:,4))
+    title('Guinada','Interpreter','Latex')
+    ylabel('U4','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
 end
 
+%% PlotU: function description
+function PlotW()
+   global W_hist T_hist;
+    figure()
+    subplot(2,2,1)
+    plot(T_hist(:,1), Rad2RPM(W_hist(:,1)))
+    title('Vel. Ang. Motor 1','Interpreter','Latex')
+    ylabel('W1 (rpm)','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    subplot(2,2,2)
+    plot(T_hist(:,1), Rad2RPM(W_hist(:,2)))
+    title('Vel. Ang. Motor 2','Interpreter','Latex')
+    ylabel('W2 (rpm)','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    subplot(2,2,3)
+    plot(T_hist(:,1), Rad2RPM(W_hist(:,3)))
+    title('Vel. Ang. Motor 3','Interpreter','Latex')
+    ylabel('W3 (rpm)','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    subplot(2,2,4)
+    plot(T_hist(:,1), Rad2RPM(W_hist(:,4)))
+    title('Vel. Ang. Motor 4','Interpreter','Latex')
+    ylabel('W4 (rpm)','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    suptitle('Velocidade Angular dos motores (rpm)')
+end
+
+%% Rad2RPM: function description
+function [RPM] = Rad2RPM(rad)
+    RPM = rad*9.54929658551;
+end
 
 function PlotXYZ(t,X)
     figure()

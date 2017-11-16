@@ -29,8 +29,6 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)
 	Kp = Gains(1);
 	Ki = Gains(2);
 	Kd = Gains(3);
-	% Limite máximo do erro acumulado da integral
-	limitInt = 50;
 	% Passo de tempo atual
 	dt = t - t_ant(idx);
 	% Calcula-se o erro
@@ -39,12 +37,6 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)
 	if (t > t_ant(idx))
 		% Erro integrativo acumulado
 	    err_int(idx) = err_int(idx) + err*dt;
-	    % Limitação do erro integrativo (anti-windup)
-	    if err_int(idx) > limitInt
-	    	err_int(idx) = limitInt;
-	    elseif err_int(idx) < -limitInt
-	    	err_int(idx) = - limitInt;
-	    end
 	    % Erro derivativo com uma suavização
 	    if dt ~= 0
 		    if err_dot(idx) == 0
@@ -62,14 +54,14 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)
 	    D = Kd*err_dot(idx);
 	    % Calculando o U com o valor do PID
 	    U = Err2U((P+I+D), x, Ref);
-	    % Saturação (o anti-windup é feito no filtro da integral já)
+	    % Saturação
 	    if U > windup(idx)
 	    	U = windup(idx);
 	    elseif U < -windup(idx)
 	    	U = - windup(idx);
 	    end
 	    % Filtro para a saída (melhorar o esforço de controle)
-	    U = U_ant(idx) + (dt/0.1)*(U - U_ant(idx));
+	    U = U_ant(idx) + (dt/0.01)*(U - U_ant(idx));
 	else
 		% Caso seja um passo retroativo não faz nada
 		U = U_ant(idx);

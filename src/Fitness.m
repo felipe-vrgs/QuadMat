@@ -6,65 +6,53 @@
 %
 % @return     O fitness
 %
-function fit = Fitness(target, gains, setpoint)
+function fit = Fitness(target, gains, setpoint, p)
+	 if nargin == 3
+        p = 0;
+    end
 	global err_int;
 	%{ 
 	 Apesar do código estar pronto para um fitness diferente por malha foi utilizada a mesma equação, ou seja, apenas a soma do erro é levada em conta no fitness
 	 No caso do Z o fitness é multiplicado por 2000*20 para que a sua escala fique mais agradável, tendo em vista que o seu erro seria alto 
 	 por ser uma malha lenta que possui valores grandes, o que é diferente para os ângulos, tendo em vista que apresentam uma variação média entre -0.32 e 0.32.
 	%} 
+	[t,X] = QuadMat(gains,target,setpoint,p);
+	errMax = 0;
+	err = zeros(size(t));
+	chkVar = zeros(size(t));
+	Kfit = 30;
+	KOS = 2;
 	switch target
 		case 'z'
-			[t,X] = QuadMat(gains,target,setpoint,0);
-			errMax = 0;
-			err = zeros(size(t));
-			for n = 1:size(t)
-				err(n) = (real(X(n,7)) - setpoint)^2;
-				errMax = errMax + err(n);
-			end
-			if errMax == 0
-				fit = 10000000;
-			else
-				fit = (1/errMax)*2000*20;
-			end
+			chkVar(:) = X(:,7);
+			Kfit = 2000*2;
+			KOS = 400;
 		case 'phi'
-			[t,X] = QuadMat(gains,target,setpoint,0);
-			errMax = 0;
-			err = zeros(size(t));
-			for n = 1:size(t)
-				err(n) = (real(X(n,1)) - setpoint)^2;
-				errMax = errMax + err(n);
-			end
-			if errMax == 0
-				fit = 10000000;
-			else
-				fit = (1/errMax)*20;
-			end
+			chkVar(:) = X(:,1);
 		case 'theta'	
-			[t,X] = QuadMat(gains,target,setpoint,0);
-			errMax = 0;
-			err = zeros(size(t));
-			for n = 1:size(t)
-				err(n) = (real(X(n,3)) - setpoint)^2;
-				errMax = errMax + err(n);
-			end
-			if errMax == 0
-				fit = 10000000;
-			else
-				fit = (1/errMax)*20;
-			end
+			chkVar(:) = X(:,3);
 		case 'psi'	
-			[t,X] = QuadMat(gains,target,setpoint,0);
-			errMax = 0;
-			err = zeros(size(t));
-			for n = 1:size(t)
-				err(n) = (real(X(n,5)) - setpoint)^2;
-				errMax = errMax + err(n);
-			end
-			if errMax == 0
-				fit = 10000000;
-			else
-				fit = (1/errMax)*20;
-			end
+			chkVar(:) = X(:,5);
+	end
+	for n = 1:size(t)
+		err(n) = (real(chkVar(n)) - setpoint)^2;
+		errMax = errMax + err(n);
+	end
+	% Verifica o % de OS
+	if chkVar(1) > setpoint
+		osValue = min(chkVar);
+	elseif chkVar(1) == setpoint
+		osValue = 0;
+	else
+		osValue = max(chkVar);
+	end
+	if p == 1
+		osValue
+	end
+	errMax = errMax + (abs(osValue - setpoint)^2)*KOS;
+	if errMax == 0
+		fit = 10000000;
+	else
+		fit = (1/errMax)*Kfit;
 	end
 end

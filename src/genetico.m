@@ -2,7 +2,7 @@
 function [gainsOut, fitOut] = Genetico(Target,SetPoint)
     global Individuos NumGenes SelectedInd Pai1 Pai2 Filhos1 Filhos2 Filhos3 FitnessPai FitnessFilhos3 FitnessFilhos1 FitnessFilhos2;
     % Definição das constantes
-    Geracoes = 40;
+    Geracoes = 60;
     Individuos = 14;
     NumGenes = 3; % Kp Kd e Ki
     % Iniciando os arrays para as informações do genético
@@ -44,6 +44,7 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
         if (G == Geracoes)
             Selected(G,1,:)
             OldFit(G,1)
+            Fitness(Target, Selected(G,1,:) , SetPoint, 1);
         end
     end
     figure()
@@ -52,7 +53,6 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
     ylabel('Fitness','Interpreter','Latex')
     xlabel('Gera\c{c}\~{a}o','Interpreter','Latex')
     grid on
-    PlotDrone([],[],'U')
 end
 
 %% Select: Seleciona os melhores, faz crossover e mutação, seleciona novamente e retorna
@@ -112,9 +112,12 @@ function [NewVal] = Mutation(OldVal)
     % Chance de ocorrer mutação (Ex: 0.15 -> 15%)
     Chance = 0.15;
     if (rand < Chance)
-        % Caso ocorra mutação faz uma soma ou subtração de 0 a 200% do valor original
+        % Caso ocorra mutação faz uma soma ou subtração de 0 a 100% do valor original
         NewVal = abs(OldVal  + (2*rand() - 0.9)*OldVal);
     else
         NewVal = OldVal;
+    end
+    if (NewVal >= 15)
+        NewVal = abs(14*rand());
     end
 end

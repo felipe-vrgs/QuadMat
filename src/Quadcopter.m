@@ -33,21 +33,21 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
 
     % Valores iniciais para o PID, 1 -> kp | 2-> ki | 3-> kd
     % Esses valores já sao os otimizados com o AG
-    kz(1) = 10.5183;
-    kz(2) = 0.0046;
-    kz(3) = 3.633;
+    kz(1) = 14.3096;
+    kz(2) = 0;
+    kz(3) = 4.0135;
 
-    kphi(1) = 171.9776;
-    kphi(2) = 0.3107;
-    kphi(3) = 30.0775;
+    kphi(1) = 35.7961;
+    kphi(2) = 0;
+    kphi(3) = 9.3163;
 
-    ktheta(1) = 1.1783;
-    ktheta(2) = 0;
-    ktheta(3) = 1.2595;
+    ktheta(1) = 37.2945;
+    ktheta(2) = 0.1017;
+    ktheta(3) = 10.007;
 
-    kpsi(1) = 1.8509;
+    kpsi(1) = 44.1832;
     kpsi(2) = 0;
-    kpsi(3) = 1.6949;
+    kpsi(3) = 13.3274;
 
     % Valores para os setpoints (2 para a altura e os ângulos devem ficar estáveis em 0)
     setpoint(1) = 2;
@@ -85,20 +85,21 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
     U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
     U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);
-
-    % Para conseguir plotar o esforço de controle depois
-    global U_hist T_hist;
-    U_hist = [U_hist; U];
-    T_hist = [T_hist; t];
     
     % Calculando a velocidade angular dos motores para os esforços de controle obtidos.
     W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
     W(2) = ((U(1)/(4*Kf)) - (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);
     W(3) = ((U(1)/(4*Kf)) - (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
-    W(4) = ((U(1)/(4*Kf)) + (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);                    
+    W(4) = ((U(1)/(4*Kf)) + (U(2)/(2*Kf)) - (U(4)/(4*Km)))^(1/2);       
+
+    % Para conseguir plotar o esforço de controle depois
+    global U_hist T_hist W_hist;
+    U_hist = [U_hist; real(U)];
+    T_hist = [T_hist; t];
+    W_hist = [W_hist; real(W)];             
   
     
-    % Omega é a velocidade relativa do motor
+    % Omega é a velocidade relativa do drone
     Omega = W(1) - W(2) + W(3) - W(4);
 
     % Equações de esp. estados
