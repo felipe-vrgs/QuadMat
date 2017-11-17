@@ -47,9 +47,9 @@ function fit = Fitness(target, gains, setpoint, p)
 	end
 	if p == 1
 		if setpoint ~= 0
-			((osValue - setpoint)/setpoint)*100
+			((osValue - setpoint)/setpoint)*100;
 		else 
-			osValue*100
+			osValue*100;
 		end
 	end
 	errMax = errMax + (abs(osValue - setpoint)^2)*KOS;

@@ -8,7 +8,7 @@ function [t,X] = QuadMat(gains,target,setpoint,plotGraphs)
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
     if plotGraphs == 1
-        PlotDrone(t,X,'XYZAng')
+        PlotDrone(t,X,'Ang')
         PlotDrone([],[],'U')
         PlotDrone([],[],'W')
     end
