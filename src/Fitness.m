@@ -21,7 +21,7 @@ function fit = Fitness(target, gains, setpoint, p)
 	err = zeros(size(t));
 	chkVar = zeros(size(t));
 	Kfit = 30;
-	KOS = 400;
+	KOS = 1;
 	switch target
 		case 'z'
 			chkVar(:) = X(:,7);
@@ -34,7 +34,7 @@ function fit = Fitness(target, gains, setpoint, p)
 			chkVar(:) = X(:,5);
 	end
 	for n = 1:size(t)
-		err(n) = (real(chkVar(n)) - setpoint)^2;
+		err(n) = t(n)*(real(chkVar(n)) - setpoint)^2;
 		errMax = errMax + err(n);
 	end
 	% Verifica o % de OS

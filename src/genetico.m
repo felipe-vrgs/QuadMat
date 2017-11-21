@@ -2,8 +2,8 @@
 function [gainsOut, fitOut] = Genetico(Target,SetPoint)
     global Individuos NumGenes SelectedInd Pai1 Pai2 Filhos1 Filhos2 Filhos3 FitnessPai FitnessFilhos3 FitnessFilhos1 FitnessFilhos2;
     % Definição das constantes
-    Geracoes = 60;
-    Individuos = 14;
+    Geracoes = 60; % 
+    Individuos = 14; %
     NumGenes = 3; % Kp Kd e Ki
     % Iniciando os arrays para as informações do genético
     OldFit = zeros(Geracoes,Individuos);
@@ -26,9 +26,9 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
         % Se for a primeira tem que calcular o fitness e gerar randômico os valores dos genes
         if (G == 1)
             for I = 1:Individuos
-                Gains(G,I,1) = rand(); % Kp
-                Gains(G,I,2) = rand(); % Ki
-                Gains(G,I,3) = rand(); % Kd
+                Gains(G,I,1) = 8*rand(); % Kp
+                Gains(G,I,2) = 8*rand(); % Ki
+                Gains(G,I,3) = 8*rand(); % Kd
                 disp(['Calculando Fitness do individuo: ',num2str(I)])
                 FitnessIn(1,I) =  Fitness(Target,Gains(1,I,:),SetPoint);
                 disp(['Valor do Fitness do individuo: ',num2str(FitnessIn(I))])
@@ -36,7 +36,8 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
         else
             % Caso contrário pega o retorno da função de seleção
             Gains(G,:,:) =  Selected(G-1,:,:);
-            FitnessIn(1,:) = OldFit(G-1,:);
+            FitnessIn(1,:) = OldFit(G-1,:); 
+            Gains(G,1,:)
         end
         % Faz a seleção, crossover, mutação e etc
         [Selected(G,:,:), OldFit(G,:)] = Select(Gains(G,:,:),SetPoint,Target,FitnessIn(1,:));
@@ -89,7 +90,7 @@ function [Selected, OldFit] = Select(Gains,SetPoint,Target,FitnessIn)
         disp(['Valor do Fitnees do filho: ',num2str(FitnessFilhos2(C))])
         disp(['Calculando Fitness do filho 3 para o individuo: ',num2str(OldIdxIn(C))])
         FitnessFilhos3(C) = Fitness(Target,Filhos3(C,:),SetPoint);
-        disp(['Valor do Fitnees do filho: ',num2str(FitnessFilhos2(C))])
+        disp(['Valor do Fitnees do filho: ',num2str(FitnessFilhos3(C))])
     end
     % Preparando os arrays para a segunda seleção
     % Aqui se junta todos os individuos em um único array
@@ -113,11 +114,11 @@ function [NewVal] = Mutation(OldVal)
     Chance = 0.15;
     if (rand < Chance)
         % Caso ocorra mutação faz uma soma ou subtração de 0 a 100% do valor original
-        NewVal = abs(OldVal  + (2*rand() - 0.9)*OldVal);
+        NewVal = abs(OldVal  + (0.4*rand() - 0.2)*OldVal);
     else
         NewVal = OldVal;
     end
     if (NewVal >= 15)
-        NewVal = abs(14*rand());
+        NewVal = 12 + rand();
     end
 end

@@ -8,7 +8,7 @@ function [t,X] = QuadMat(gains,target,setpoint,plotGraphs)
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
     if plotGraphs == 1
-        PlotDrone(t,X,'Ang')
+        PlotDrone(t,X,'XYZAng')
         PlotDrone([],[],'U')
         PlotDrone([],[],'W')
     end
@@ -25,7 +25,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
         Referência: https://www.mathworks.com/help/matlab/math/choose-an-ode-solver.html
     %}
     Control = 'PID';
-    Ins = InsertDisturb('phi','theta','psi'); %
+    Ins = InsertDisturb('phi'); %
     % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
@@ -37,15 +37,15 @@ function [in] = InsertDisturb(varargin)
     for n = 1:nargin
         val = varargin(n);
         if strcmp(val,'phi')
-            in(1) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(1) = 0.18; %  -10 a 10º de disturbio-0.17453 + 2*rand(1,1)*0.17453
         elseif strcmp(val,'phidot')
             in(2) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'theta')
-            in(3) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(3) = 0.18; % -10 a 10º de disturbio
         elseif strcmp(val,'thetadot')
             in(4) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'psi')
-            in(5) =  -0.17453 + 2*rand(1,1)*0.17453; % -10 a 10º de disturbio
+            in(5) = 0.18; % -10 a 10º de disturbio
         elseif strcmp(val,'psidot')
             in(6) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'z')
@@ -105,13 +105,14 @@ function SetGlobals()
     b(3) = L/Iz;
 
     % PID
-    global err_ant err_int windup t_ant err_dot U_ant;
+    global err_ant err_int windup t_ant err_dot U_ant err_2ant;
     err_ant = zeros(4,1);
     windup = [15 0.1 0.1 0.1];
     err_int = zeros(4,1);
     err_dot = zeros(4,1);
     t_ant = zeros(4,1);
     U_ant = zeros(4,1);
+    err_2ant = zeros(4,1);
 
     % Plotagem
     global U_hist T_hist W_hist;

@@ -10,7 +10,7 @@
 %
 function [U] = PID(Gains, x, SetPoint, Ref, t)
 	% Globais do PID
-	global err_ant err_int windup t_ant err_dot U_ant;
+	global err_ant err_int windup t_ant err_dot U_ant err_2ant;
 	% Pegando as variáveis de acordo com quem chamou a função
 	if strcmp(Ref,'U1')
 		idx = 1;
@@ -36,7 +36,7 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)
 	% Tem que verificar se o tempo foi pra frente (os algoritmos ode tem esse comportamento de não seguirem o tempo de forma linear)
 	if (t > t_ant(idx))
 		% Erro integrativo acumulado
-	    err_int(idx) = err_int(idx) + err*dt;
+	    err_int(idx) = err_int(idx) + ((err+err_ant(idx))/2)*dt;
 	    % Erro derivativo com uma suavização
 	    if dt ~= 0
 		    if err_dot(idx) == 0
@@ -69,6 +69,7 @@ function [U] = PID(Gains, x, SetPoint, Ref, t)
 	% Atualiza as variáveis para o prox passo
  	t_ant(idx) = t;
  	U_ant(idx) = U;
+	err_2ant(idx) = err_ant(idx);
 	err_ant(idx) = err;
 end
 

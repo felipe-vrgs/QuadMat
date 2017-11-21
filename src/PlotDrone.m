@@ -99,24 +99,24 @@ function [os] = getOS(vals, setpoint)
     else
         os = max(vals);
     end
-    os = Rad2Deg(os)
+    os = Rad2Deg(os);
 end
 
 %% getSetTime: function description
 function [setTime] = getSetTime(x, t, setpoint)
     setTime = 0;
     if Rad2Deg(x(1)) > setpoint
-        cmp = 1.05*setpoint;
+        cmp = 1.02*setpoint;
     elseif Rad2Deg(x(1)) == setpoint
         cmp = 0;
     else
-        cmp = 0.95*setpoint;
+        cmp = 0.98*setpoint;
     end
     if setpoint == 0
         if Rad2Deg(x(1)) > setpoint
-            cmp = 0.05;
+            cmp = 0.02*x(1);
         elseif Rad2Deg(x(1)) < setpoint
-            cmp = -0.05;
+            cmp = -0.02*x(1);
         end
     end
     for I = 1:size(t)
@@ -132,7 +132,7 @@ function [setTime] = getSetTime(x, t, setpoint)
             end
         end
     end
-    setTime
+    setTime;
 end
 
 
