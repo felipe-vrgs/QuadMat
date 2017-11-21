@@ -25,7 +25,7 @@ function [t,X] = ExecMain(gains,target,setpoint)
         Referência: https://www.mathworks.com/help/matlab/math/choose-an-ode-solver.html
     %}
     Control = 'PID';
-    Ins = InsertDisturb('phi'); %
+    Ins = InsertDisturb(); %
     % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
     [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);

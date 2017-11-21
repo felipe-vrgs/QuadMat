@@ -26,9 +26,9 @@ function [gainsOut, fitOut] = Genetico(Target,SetPoint)
         % Se for a primeira tem que calcular o fitness e gerar randômico os valores dos genes
         if (G == 1)
             for I = 1:Individuos
-                Gains(G,I,1) = 8*rand(); % Kp
-                Gains(G,I,2) = 8*rand(); % Ki
-                Gains(G,I,3) = 8*rand(); % Kd
+                Gains(G,I,1) = rand(); % Kp
+                Gains(G,I,2) = rand(); % Ki
+                Gains(G,I,3) = rand(); % Kd
                 disp(['Calculando Fitness do individuo: ',num2str(I)])
                 FitnessIn(1,I) =  Fitness(Target,Gains(1,I,:),SetPoint);
                 disp(['Valor do Fitness do individuo: ',num2str(FitnessIn(I))])
@@ -113,8 +113,8 @@ function [NewVal] = Mutation(OldVal)
     % Chance de ocorrer mutação (Ex: 0.15 -> 15%)
     Chance = 0.15;
     if (rand < Chance)
-        % Caso ocorra mutação faz uma soma ou subtração de 0 a 100% do valor original
-        NewVal = abs(OldVal  + (0.4*rand() - 0.2)*OldVal);
+        % Caso ocorra mutação faz uma soma ou subtração de 0 a 20% do valor original
+        NewVal = abs(OldVal  + (0.8*rand() - 0.4)*OldVal);
     else
         NewVal = OldVal;
     end
