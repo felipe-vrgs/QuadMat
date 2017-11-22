@@ -99,7 +99,7 @@ function [os] = getOS(vals, setpoint)
     else
         os = max(vals);
     end
-    os = Rad2Deg(os);
+    os = (abs(os)/abs(vals(1)))*100
 end
 
 %% getSetTime: function description
@@ -114,9 +114,9 @@ function [setTime] = getSetTime(x, t, setpoint)
     end
     if setpoint == 0
         if Rad2Deg(x(1)) > setpoint
-            cmp = 0.02*x(1);
+            cmp = 0.02*Rad2Deg(x(1));
         elseif Rad2Deg(x(1)) < setpoint
-            cmp = -0.02*x(1);
+            cmp = -0.02*Rad2Deg(x(1));
         end
     end
     for I = 1:size(t)
@@ -125,14 +125,14 @@ function [setTime] = getSetTime(x, t, setpoint)
                 setTime = t(I);
                 break
             end
-        elseif Rad2Deg(x(1)) < setpoint
+        elseif (x(1)) < setpoint
             if (Rad2Deg(x(I)) >= cmp)
                 setTime = t(I);
                 break
             end
         end
     end
-    setTime;
+    setTime
 end
 
 
@@ -185,23 +185,25 @@ end
 
 function PlotAngles(t,X)
     figure()
-    subplot(2,2,1)
-    plot(t,Rad2Deg(X(:,1))) % Angulo phi
-    title('\^Angulo $\phi$','Interpreter','Latex')
-    ylabel('Graus','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    getSetTime(X(:,1),t,0);
-    getOS(X(:,1),0);
-    subplot(2,2,2)
-    plot(t,Rad2Deg(X(:,3))) % Posição em theta
-    title('\^Angulo $\theta$','Interpreter','Latex')
-    ylabel('Graus','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    getSetTime(X(:,3),t,0);
-    getOS(X(:,3),0);
-    subplot(2,1,2)
+    % subplot(2,2,1)
+    % plot(t,Rad2Deg(X(:,1))) % Angulo phi
+    % title('\^Angulo $\phi$','Interpreter','Latex')
+    % ylabel('Graus','Interpreter','Latex')
+    % xlabel('Tempo (s)','Interpreter','Latex')
+    % grid on
+    % getSetTime(X(:,1),t,0);
+    % getOS(X(:,1),0);
+    % Rad2Deg(X(350,1))
+    % subplot(2,2,2)
+    % plot(t,Rad2Deg(X(:,3))) % Posição em theta
+    % title('\^Angulo $\theta$','Interpreter','Latex')
+    % ylabel('Graus','Interpreter','Latex')
+    % xlabel('Tempo (s)','Interpreter','Latex')
+    % grid on
+    % getSetTime(X(:,3),t,0);
+    % getOS(X(:,3),0);
+    % Rad2Deg(X(350,3))
+    % subplot(2,1,2)
     plot(t,Rad2Deg(X(:,5))) % Posição em psi
     title('\^Angulo $\psi$','Interpreter','Latex')
     ylabel('Graus','Interpreter','Latex')
@@ -209,7 +211,8 @@ function PlotAngles(t,X)
     grid on
     getSetTime(X(:,5),t,0);
     getOS(X(:,5),0);
-    suptitle('Movimento Angular')
+    % Rad2Deg(X(350,5))
+    % suptitle('Movimento Angular')
 end
 
 function PlotXYZAng(t,X)

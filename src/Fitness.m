@@ -21,7 +21,7 @@ function fit = Fitness(target, gains, setpoint, p)
 	err = zeros(size(t));
 	chkVar = zeros(size(t));
 	Kfit = 30;
-	KOS = 1;
+	KOS = 100;
 	switch target
 		case 'z'
 			chkVar(:) = X(:,7);
