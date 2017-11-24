@@ -99,9 +99,8 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
         otherwise
     end
 
-    global divisoes x1ini x1fim x1divs x2ini x2fim x2divs x1delta x2delta cacm U_MAP;
-    newt=(abs(t)-0)/0.01; newt=floor(newt+1);
-
+    global divisoes x1ini x1fim x1divs x2ini x2fim x2divs x1delta x2delta cacm U_MAP map;
+    newt=(t)/0.01; newt=floor(newt+1);
     newI=(x(7)-x1ini)/x1delta; newI=floor(newI+1);
     if newI > divisoes
         newI=divisoes;
@@ -114,18 +113,48 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     elseif newJ < 1
         newJ = 1;
     end
-
     U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
+    % if newI == 1 && newJ == 1
+    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1))/4;
+    % elseif newI == divisoes && newJ == 1
+    %     U(1) = (map(newI,newJ) + map(newI-1,newJ) + map(newI,newJ+1) + map(newI-1,newJ+1))/4;
+    % elseif newI == 1 && newJ == divisoes
+    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ-1) + map(newI+1,newJ-1))/4;
+    % elseif newI == 1 && newJ ~= 1
+    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI,newJ-1) +  map(newI+1,newJ-1))/6;
+    % elseif newI ~= 1 && newJ == 1
+    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI-1,newJ) +  map(newI-1,newJ+1))/6;
+    % elseif (2 - x(7)) > 0.3
+    %     U(1) = (5*map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI-1,newJ) + map(newI,newJ-1)+  map(newI-1,newJ+1) + map(newI+1,newJ-1) + map(newI-1,newJ-1))/13;
+    % else
+    %     U(1) = map(newI,newJ);
+    % end
     U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
     U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
     U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);
 
     cacm(newI,newJ) = cacm(newI,newJ) + 1;
-    if (U_MAP(newI,newJ) == 0)
-        U_MAP(newI,newJ) = U(1);
-    else
-        U_MAP(newI,newJ) = (U_MAP(newI,newJ) +  U(1))/2;
+    if cacm(newI,newJ) > 255
+        cacm(newI,newJ) = 255;
     end
+
+    rx = x1divs/2;
+    ry = x2divs/2;
+
+    alph = abs(((abs(x(7)-x1ini) - rx)/rx + (abs(x(8)-x2ini) - ry)/ry)/2);
+
+    if (U_MAP(newI,newJ) == 0)
+        U_MAP(newI,newJ) = U(1)*alph;
+    else
+        U_MAP(newI,newJ) = (U_MAP(newI,newJ)*(1-alph) +  U(1)*alph);
+    end
+
+    if U_MAP(newI,newJ) > 15
+        U_MAP(newI,newJ) = 15;
+    elseif U_MAP(newI,newJ) < -15
+        U_MAP(newI,newJ) = -15;
+    end
+        
     
     % Calculando a velocidade angular dos motores para os esforços de controle obtidos.
     W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);

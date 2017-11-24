@@ -16,27 +16,30 @@ function CACM()
         CodigoCores(n,2) = 255 - 255*((n-1)/255);
         CodigoCores(n,3) = 255 - 255*((n-1)/255); 
     end
-    divisoes=80;
+    divisoes=100;
     x1ini=-0; x1fim=4; x1divs=divisoes;
     x2ini=-4; x2fim=4;  x2divs=divisoes;
     x1delta=(x1fim-x1ini)/(x1divs);
     x2delta=(x2fim-x2ini)/(x2divs);
-    numSim = 10;
+    numSim = 30;
     cacm = zeros(divisoes,divisoes);
     U_MAP = zeros(divisoes,divisoes);
     % figure(1); hold on;
-    for num=1:numSim
+    for num=1:numSim+1
         z_val = (num - 1)/((numSim)/4);
-        for num2=1:numSim
+        for num2=1:numSim+1
             zdot_val = -4 + 2*(num2 - 1)/((numSim)/4);
-            [t,X] = QuadMat([],'',0,0);
+            if (z_val == 2 && zdot_val == 0)
+            else
+                [t,X] = QuadMat([],'',0,0);
+            end
             % plot(t(1:500),X(1:500,7))
         end
     end
     % hold off;
     assignin('base', 'cacm', cacm);
     assignin('base', 'U_MAP', U_MAP);
-    plot1(cacm);
+    plot1(cacm, U_MAP);
 end
 
 %% InterpolaRGB: function description
@@ -51,7 +54,7 @@ end
 %! @brief      Does the plotting of the space state in the shape
 %!          of colored squares.
 %! @param      cacm     The space state matrix
-function plot1(cacm)
+function plot1(cacm, U_MAP)
     global CodigoCores divisoes x1ini x1delta x2ini x2delta numCores;
     figure(); hold on;
     for j=1:divisoes
@@ -75,8 +78,19 @@ function plot1(cacm)
         end
     end
     hold off;
-    xlabel('x_1'); ylabel('x_2'); 
+    ylabel('$\dot{Z}$','Interpreter','Latex')
+    xlabel('Z','Interpreter','Latex')
     title('Evolu\c{c}\~{a}o dos Estados','Interpreter','Latex');
+
+    figure()
+    mesh(U_MAP)
+    ylabel('$\dot{Z}$','Interpreter','Latex')
+    xlabel('$Z$','Interpreter','Latex')
+    zlabel('$U_{1}$','Interpreter','Latex')
+    % figure()
+    % pcolor(cacm)
+    % ylabel('$\dot{Z}$','Interpreter','Latex')
+    % xlabel('Z','Interpreter','Latex')
 end
 
 %% AchaCelula: function description
