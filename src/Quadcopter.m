@@ -113,22 +113,26 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
     elseif newJ < 1
         newJ = 1;
     end
-    U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
-    % if newI == 1 && newJ == 1
-    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1))/4;
-    % elseif newI == divisoes && newJ == 1
-    %     U(1) = (map(newI,newJ) + map(newI-1,newJ) + map(newI,newJ+1) + map(newI-1,newJ+1))/4;
-    % elseif newI == 1 && newJ == divisoes
-    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ-1) + map(newI+1,newJ-1))/4;
-    % elseif newI == 1 && newJ ~= 1
-    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI,newJ-1) +  map(newI+1,newJ-1))/6;
-    % elseif newI ~= 1 && newJ == 1
-    %     U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI-1,newJ) +  map(newI-1,newJ+1))/6;
-    % elseif (2 - x(7)) > 0.3
-    %     U(1) = (5*map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1) + map(newI+1,newJ+1) + map(newI-1,newJ) + map(newI,newJ-1)+  map(newI-1,newJ+1) + map(newI+1,newJ-1) + map(newI-1,newJ-1))/13;
-    % else
-    %     U(1) = map(newI,newJ);
-    % end
+    % U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
+    if  (setpoint(1) - x(7)) > -0.1 || (setpoint(1) - x(7)) < 0.1
+        U(1) = map(newI,newJ);
+    elseif newI == 1 && newJ == 1
+        U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1))/3;
+    elseif newI == divisoes && newJ == 1
+        U(1) = (map(newI,newJ) + map(newI-1,newJ) + map(newI,newJ+1))/3;
+    elseif newI == 1 && newJ == divisoes
+        U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ-1))/3;
+    elseif newI == divisoes && newJ == divisoes
+        U(1) = (map(newI,newJ) + map(newI-1,newJ) + map(newI,newJ-1))/3;
+    elseif  (setpoint(1) - x(7)) > 0 && x(8) > 0
+        U(1) = (map(newI,newJ) + map(newI,newJ-1) + map(newI+1,newJ))/3;
+    elseif  (setpoint(1) - x(7)) > 0 && x(8) < 0
+        U(1) = (map(newI,newJ) + map(newI+1,newJ) + map(newI,newJ+1))/3;
+    elseif  (setpoint(1) - x(7)) < 0 && x(8) < 0
+        U(1) = (map(newI,newJ) + map(newI,newJ+1) + map(newI-1,newJ))/3;
+    elseif  (setpoint(1) - x(7)) < 0 && x(8) > 0
+        U(1) = (map(newI,newJ) + map(newI,newJ-1) + map(newI-1,newJ))/3;
+    end
     U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
     U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
     U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);

@@ -21,7 +21,7 @@ function CACM()
     x2ini=-4; x2fim=4;  x2divs=divisoes;
     x1delta=(x1fim-x1ini)/(x1divs);
     x2delta=(x2fim-x2ini)/(x2divs);
-    numSim = 30;
+    numSim = 50;
     cacm = zeros(divisoes,divisoes);
     U_MAP = zeros(divisoes,divisoes);
     % figure(1); hold on;
