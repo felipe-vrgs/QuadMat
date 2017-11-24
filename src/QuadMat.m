@@ -8,8 +8,8 @@ function [t,X] = QuadMat(gains,target,setpoint,plotGraphs)
     % comet3(X(:,11),X(:,9),X(:,7)); % Plot de X, Y, Z
     % comet3(X(:,1),X(:,3),X(:,5)); % Plot dos ângulos
     if plotGraphs == 1
-        PlotDrone(t,X,'Ang')
-        % PlotDrone([],[],'U')
+        PlotDrone(t,X,'XYZ')
+        PlotDrone(t,[],'U')
         % PlotDrone([],[],'W')
     end
 end
@@ -17,7 +17,6 @@ end
 
 function [t,X] = ExecMain(gains,target,setpoint)
     SetGlobals();
-    global divisoes;
     %{
         Era utilizado a ODE45, porém ela realiza muitos passos retroativos (o que estava distorcendo o sinal de esforço de controle) e também
         não funciona muito bem com sistemas com tolerancia alta.
@@ -25,14 +24,15 @@ function [t,X] = ExecMain(gains,target,setpoint)
         Referência: https://www.mathworks.com/help/matlab/math/choose-an-ode-solver.html
     %}
     Control = 'PID';
-    Ins = InsertDisturb(target); %
+    Ins = InsertDisturb('z','zdot');
     % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
     options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
-    [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
+    [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:4,Ins,options);
 end
 
 %% InsertDisturb: Insere um disturbio nos argumentos passados
 function [in] = InsertDisturb(varargin)
+    global z_val zdot_val;
     in = [0 0 0 0 0 0 0 0 0 0 0 0];
     for n = 1:nargin
         val = varargin(n);
@@ -49,9 +49,9 @@ function [in] = InsertDisturb(varargin)
         elseif strcmp(val,'psidot')
             in(6) = -0.1 + 2*rand(1,1)*0.1;
         elseif strcmp(val,'z')
-            in(7) = -100 + 2*rand(1,1)*100;
+            in(7) = z_val;
         elseif strcmp(val,'zdot')
-            in(8) = -0.5 + 2*rand(1,1)*0.5;
+            in(8) = zdot_val;
         elseif strcmp(val,'x')
             in(9) = -100 + 2*rand(1,1)*100;
         elseif strcmp(val,'xdot')
@@ -67,21 +67,6 @@ end
 %% SetGlobals: function description
 function SetGlobals()
     % Aqui são definidas as variáveis globais do sistema
-    % CACM
-    global divisoes x1ini x1fim x1divs x2ini x2fim x2divs x1delta x2delta numCores CodigoCores;
-    numCores = 85;
-    CodigoCores = zeros(numCores,3); % cores RGB
-    for n=1:numCores
-        CodigoCores(n,1) = 255 - 255*3*((n-1)/255); 
-        CodigoCores(n,2) = 255 - 255*3*((n-1)/255); 
-        CodigoCores(n,3) = 255 - 255*3*((n-1)/255); 
-    end
-    divisoes=60;
-    x1ini=0; x1fim=1; x1divs=divisoes;
-    x2ini=-4; x2fim=4;  x2divs=divisoes;
-    x1delta=(x1fim-x1ini)/(x1divs);
-    x2delta=(x2fim-x2ini)/(x2divs);
-    
     % Drone
     global g L Kf Km m a b;
     g = 9.81;     % Gravidade
@@ -116,7 +101,11 @@ function SetGlobals()
 
     % Plotagem
     global U_hist T_hist W_hist;
-    U_hist = [];
+    U_hist = zeros(401,4);
     W_hist = [];
     T_hist = [];
+
+    global map;
+    A = importdata('1.mat');
+    map = A.U_MAP;
 end

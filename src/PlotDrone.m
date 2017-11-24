@@ -20,33 +20,33 @@ function PlotDrone(t,X,ty)
     elseif strcmp(ty,'VelAng')
         PlotAngVel(t,X)
     elseif strcmp(ty,'U')
-        PlotU()
+        PlotU(t)
     elseif strcmp(ty,'W')
         PlotW()
     end
 end
 
 %% PlotU: function description
-function PlotU()
-   global U_hist T_hist;
+function PlotU(t)
+   global U_hist;
     figure()
     subplot(2,2,1)
-    plot(T_hist(:,1), U_hist(:,1))
+    plot(t, U_hist(:,1))
     title('Empuxo Vertical','Interpreter','Latex')
     ylabel('U1','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,2)
-    plot(T_hist(:,1), U_hist(:,2))
+    plot(t, U_hist(:,2))
     title('Rolagem','Interpreter','Latex')
     ylabel('U2','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,3)
-    plot(T_hist(:,1), U_hist(:,3))
+    plot(t, U_hist(:,3))
     title('Arfagem','Interpreter','Latex')
     ylabel('U3','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     subplot(2,2,4)
-    plot(T_hist(:,1), U_hist(:,4))
+    plot(t, U_hist(:,4))
     title('Guinada','Interpreter','Latex')
     ylabel('U4','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
@@ -90,7 +90,10 @@ function [Deg] = Rad2Deg(rad)
 end
 
 %% getOS: function description
-function [os] = getOS(vals, setpoint)
+function [os] = getOS(vals, setpoint, deg)
+    if nargin == 2
+        deg = 1;
+    end
    % Verifica o % de OS
     if vals(1) > setpoint
         os = min(vals);
@@ -99,34 +102,52 @@ function [os] = getOS(vals, setpoint)
     else
         os = max(vals);
     end
-    os = (abs(os)/abs(vals(1)))*100
+    os
+     if deg == 1
+        os = (abs(os)/abs(vals(1)))*100
+    else
+        os = ((abs(os) - setpoint)/setpoint)*100
+    end
 end
 
 %% getSetTime: function description
-function [setTime] = getSetTime(x, t, setpoint)
+function [setTime] = getSetTime(x, t, setpoint, deg)
+    if nargin == 3
+        deg = 1;
+    end
+    if deg == 1
+        varbl = Rad2Deg(x(1));
+    else
+        varbl = x(1);
+    end
     setTime = 0;
-    if Rad2Deg(x(1)) > setpoint
+    if varbl > setpoint
         cmp = 1.02*setpoint;
-    elseif Rad2Deg(x(1)) == setpoint
+    elseif varbl == setpoint
         cmp = 0;
     else
         cmp = 0.98*setpoint;
     end
     if setpoint == 0
-        if Rad2Deg(x(1)) > setpoint
-            cmp = 0.02*Rad2Deg(x(1));
-        elseif Rad2Deg(x(1)) < setpoint
-            cmp = -0.02*Rad2Deg(x(1));
+        if varbl > setpoint
+            cmp = 0.02*varbl;
+        elseif varbl < setpoint
+            cmp = -0.02*varbl;
         end
     end
     for I = 1:size(t)
-        if Rad2Deg(x(1)) > setpoint
-            if (Rad2Deg(x(I)) <= cmp)
+        if deg == 1
+            varbl = Rad2Deg(x(I));
+        else
+            newVar = x(I);
+        end
+        if varbl > setpoint
+            if (newVar <= cmp)
                 setTime = t(I);
                 break
             end
-        elseif (x(1)) < setpoint
-            if (Rad2Deg(x(I)) >= cmp)
+        elseif varbl < setpoint
+            if (newVar >= cmp)
                 setTime = t(I);
                 break
             end
@@ -139,25 +160,28 @@ end
 
 function PlotXYZ(t,X)
     figure()
-    subplot(2,2,1)
-    plot(t,X(:,9)) % Posição em X
-    title('Posi\c{c}\~{a}o em X','Interpreter','Latex')
-    ylabel('X','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    subplot(2,2,2)
-    plot(t,X(:,11)) % Posição em Y
-    title('Posi\c{c}\~{a}o em Y','Interpreter','Latex')
-    ylabel('Y','Interpreter','Latex')
-    xlabel('Tempo (s)','Interpreter','Latex')
-    grid on
-    subplot(2,1,2)
+    % subplot(2,2,1)
+    % plot(t,X(:,9)) % Posição em X
+    % title('Posi\c{c}\~{a}o em X','Interpreter','Latex')
+    % ylabel('X','Interpreter','Latex')
+    % xlabel('Tempo (s)','Interpreter','Latex')
+    % grid on
+    % subplot(2,2,2)
+    % plot(t,X(:,11)) % Posição em Y
+    % title('Posi\c{c}\~{a}o em Y','Interpreter','Latex')
+    % ylabel('Y','Interpreter','Latex')
+    % xlabel('Tempo (s)','Interpreter','Latex')
+    % grid on
+    % subplot(2,1,2)
     plot(t,X(:,7)) % Posição em Z
     title('Posi\c{c}\~{a}o em Z','Interpreter','Latex')
     ylabel('Z','Interpreter','Latex')
     xlabel('Tempo (s)','Interpreter','Latex')
     grid on
-    suptitle('Movimento em XYZ')
+    % getSetTime(X(:,7),t, 2, 0)
+    % getOS(X(:,7),2,0);
+    % X(350,7)
+    % suptitle('Movimento em XYZ')
 end
 
 function PlotXYZVel(t,X)
@@ -185,25 +209,25 @@ end
 
 function PlotAngles(t,X)
     figure()
-    % subplot(2,2,1)
-    % plot(t,Rad2Deg(X(:,1))) % Angulo phi
-    % title('\^Angulo $\phi$','Interpreter','Latex')
-    % ylabel('Graus','Interpreter','Latex')
-    % xlabel('Tempo (s)','Interpreter','Latex')
-    % grid on
-    % getSetTime(X(:,1),t,0);
-    % getOS(X(:,1),0);
-    % Rad2Deg(X(350,1))
-    % subplot(2,2,2)
-    % plot(t,Rad2Deg(X(:,3))) % Posição em theta
-    % title('\^Angulo $\theta$','Interpreter','Latex')
-    % ylabel('Graus','Interpreter','Latex')
-    % xlabel('Tempo (s)','Interpreter','Latex')
-    % grid on
-    % getSetTime(X(:,3),t,0);
-    % getOS(X(:,3),0);
-    % Rad2Deg(X(350,3))
-    % subplot(2,1,2)
+    subplot(2,2,1)
+    plot(t,Rad2Deg(X(:,1))) % Angulo phi
+    title('\^Angulo $\phi$','Interpreter','Latex')
+    ylabel('Graus','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    getSetTime(X(:,1),t,0);
+    getOS(X(:,1),0);
+    Rad2Deg(X(350,1))
+    subplot(2,2,2)
+    plot(t,Rad2Deg(X(:,3))) % Posição em theta
+    title('\^Angulo $\theta$','Interpreter','Latex')
+    ylabel('Graus','Interpreter','Latex')
+    xlabel('Tempo (s)','Interpreter','Latex')
+    grid on
+    getSetTime(X(:,3),t,0);
+    getOS(X(:,3),0);
+    Rad2Deg(X(350,3))
+    subplot(2,1,2)
     plot(t,Rad2Deg(X(:,5))) % Posição em psi
     title('\^Angulo $\psi$','Interpreter','Latex')
     ylabel('Graus','Interpreter','Latex')
@@ -211,8 +235,8 @@ function PlotAngles(t,X)
     grid on
     getSetTime(X(:,5),t,0);
     getOS(X(:,5),0);
-    % Rad2Deg(X(350,5))
-    % suptitle('Movimento Angular')
+    Rad2Deg(X(350,5))
+    suptitle('Movimento Angular')
 end
 
 function PlotXYZAng(t,X)

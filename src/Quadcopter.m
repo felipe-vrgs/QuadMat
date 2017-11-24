@@ -99,11 +99,33 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
         otherwise
     end
 
-    % As 4 malhas de controle já fechadas e aplicadas nos esforços de controle
+    global divisoes x1ini x1fim x1divs x2ini x2fim x2divs x1delta x2delta cacm U_MAP;
+    newt=(abs(t)-0)/0.01; newt=floor(newt+1);
+
+    newI=(x(7)-x1ini)/x1delta; newI=floor(newI+1);
+    if newI > divisoes
+        newI=divisoes;
+    elseif newI < 1
+        newI = 1;
+    end
+    newJ=(x(8)-x2ini)/x2delta; newJ=floor(newJ+1);
+    if newJ > divisoes
+        newJ=divisoes;
+    elseif newJ < 1
+        newJ = 1;
+    end
+
     U(1) = PID([kz(1) kz(2) kz(3)], x, setpoint(1), 'U1',t);
     U(2) = PID([kphi(1) kphi(2) kphi(3)], x, setpoint(2), 'U2', t);
     U(3) = PID([ktheta(1) ktheta(2) ktheta(3)], x, setpoint(3), 'U3', t);
     U(4) = PID([kpsi(1) kpsi(2) kpsi(3)], x, setpoint(4), 'U4', t);
+
+    cacm(newI,newJ) = cacm(newI,newJ) + 1;
+    if (U_MAP(newI,newJ) == 0)
+        U_MAP(newI,newJ) = U(1);
+    else
+        U_MAP(newI,newJ) = (U_MAP(newI,newJ) +  U(1))/2;
+    end
     
     % Calculando a velocidade angular dos motores para os esforços de controle obtidos.
     W(1) = ((U(1)/(4*Kf)) + (U(3)/(2*Kf)) + (U(4)/(4*Km)))^(1/2);
@@ -113,7 +135,7 @@ function dx = Quadcopter(t,x,control,gains,target,sp)
 
     % Para conseguir plotar o esforço de controle depois
     global U_hist T_hist W_hist;
-    U_hist = [U_hist; real(U)];
+    U_hist(newt,:) = real(U);
     T_hist = [T_hist; t];
     W_hist = [W_hist; real(W)];             
   
