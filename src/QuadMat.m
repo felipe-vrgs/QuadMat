@@ -26,8 +26,8 @@ function [t,X] = ExecMain(gains,target,setpoint)
     Control = 'PID';
     Ins = InsertDisturb();
     % Realizando uma comparação entre os dois o 23 é menos preciso, logo são utilizados esses parâmetros para aumentar a sua precisão.
-    % options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
-    [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins);
+    options = odeset('RelTol',1e-7,'AbsTol',1e-9,'Refine',4);
+    [t,X] = ode23(@(t,y) Quadcopter(t,y,Control,gains,target,setpoint),0:0.01:10,Ins,options);
 end
 
 %% InsertDisturb: Insere um disturbio nos argumentos passados

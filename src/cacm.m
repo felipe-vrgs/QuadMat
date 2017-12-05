@@ -21,18 +21,22 @@ function CACM()
     x2ini=-4; x2fim=4;  x2divs=divisoes;
     x1delta=(x1fim-x1ini)/(x1divs);
     x2delta=(x2fim-x2ini)/(x2divs);
-    numSim = 50;
     cacm = zeros(divisoes,divisoes);
     U_MAP = zeros(divisoes,divisoes);
+    numact = 0;
+    numSim = 20;
     % figure(1); hold on;
     for num=1:numSim+1
+        numact = numact + 1;
         z_val = (num - 1)/((numSim)/4);
         for num2=1:numSim+1
             zdot_val = -4 + 2*(num2 - 1)/((numSim)/4);
+            fprintf('z_val=%g  zdot_val=%g  Sim n: %g\n',z_val,zdot_val,numact);
             if (z_val == 2 && zdot_val == 0)
             else
                 [t,X] = QuadMat([],'',0,0);
             end
+            numact = numact + 1;
             % plot(t(1:500),X(1:500,7))
         end
     end

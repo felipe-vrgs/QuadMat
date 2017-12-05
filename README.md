@@ -8,8 +8,5 @@ Some MATLAB scripts for a drone simulation, can be used via script or simulink.
 * Plot of X,Y,Z axis values, angles (ϕ, θ, ψ) and input control variation.
 * Simulink blocks for the model (needs improving).
 * PID optmized by GA on the **height** and **atitude** loops.
-
-## TODO
-
-* Develop CACM method.
-* Get the lookup table for the controled height loop.
+* CM extraction.
+* Beggining of CACM implementation.
